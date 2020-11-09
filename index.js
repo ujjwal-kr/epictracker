@@ -13,5 +13,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
-    console.log('Example app listening on port 3888!');
+    console.log('PROGRAM LOADED INTO MEMORY');
 });
