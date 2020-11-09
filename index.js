@@ -13,6 +13,6 @@ app.get('/', (req, res) => {
     res.send("hey")
 });
 
-app.listen(3888 || process.env.PORT, () => {
+app.listen(process.env.PORT, () => {
     console.log('Example app listening on port 3888!');
 });
