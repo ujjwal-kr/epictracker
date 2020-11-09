@@ -9,7 +9,8 @@ app.get('/', (req, res) => {
     console.log(req.headers['x-forwarded-for'])
     console.log("========USER AGENT=======")
     console.warn(req.headers["user-agent"])
-    res.sendFile(path.join(__dirname, 'temp.html'))
+    // res.sendFile(path.join(__dirname, 'temp.html'))
+    res.send("hey")
 });
 
 app.listen(3888 || process.env.PORT, () => {
