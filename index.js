@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     const ip = req.headers['x-forwarded-for']
     const agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36';
 
-    const url = 'https://whatismyipaddress.com/ip/' + '223.238.100.186'
+    const url = 'https://whatismyipaddress.com/ip/' + ip
 
     Axios.get(url, {headers: {'user-agent': agent}}).then(res => {
         const $ = cheerio.load(res.data)
