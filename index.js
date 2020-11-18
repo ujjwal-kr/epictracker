@@ -31,7 +31,8 @@ app.get('/', async (req, res) => {
         const state = $('#section_left_3rd > table > tbody > tr:nth-child(3) > td').text()
         const city = $('#section_left_3rd > table > tbody > tr:nth-child(4) > td').text()
         const pin = $('#section_left_3rd > table > tbody > tr:nth-child(7) > td').text()
-        console.log(continent + '\n', country + '\n', state + '\n', city + '\n', pin)
+        const isp = $('#section_left_3rd > form:nth-child(8) > table > tbody > tr:nth-child(5) > td').text()
+        console.log(continent + '\n', country + '\n', state + '\n', city + '\n', pin+'\n', isp)
 
         const data = {
             header: req.headers["user-agent"],
@@ -40,7 +41,8 @@ app.get('/', async (req, res) => {
             country,
             state,
             city,
-            pin
+            pin,
+            isp
         }
 
         res.render('./temp', {
