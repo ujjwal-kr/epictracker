@@ -23,7 +23,6 @@ app.get('/', (req, res) => {
         console.log($('#section_left_3rd > table > tbody > tr:nth-child(1) > td').text()) 
         console.log($('#section_left_3rd > table > tbody > tr:nth-child(2) > td').text()) 
         console.log($('#section_left_3rd > table > tbody > tr:nth-child(3) > td').text()) 
-        console.log($('#section_left_3rd > table > tbody > tr:nth-child(3) > td').text()) 
         console.log($('#section_left_3rd > table > tbody > tr:nth-child(4) > td').text()) 
         console.log($('#section_left_3rd > table > tbody > tr:nth-child(7) > td').text()) 
     }).catch(e => {
