@@ -2,10 +2,12 @@ const express = require('express');
 const app = express();
 
 const cheerio = require('cheerio');
-const { default: Axios } = require('axios');
+const {
+    default: Axios
+} = require('axios');
 
 app.set('view engine', 'ejs');
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     console.log(req.socket.remoteAddress)
     console.log(req.ip)
     console.log("==IP ADDR==")
@@ -18,28 +20,41 @@ app.get('/', (req, res) => {
 
     const url = 'https://whatismyipaddress.com/ip/' + ip
 
-    Axios.get(url, {headers: {'user-agent': agent}}).then(res => {
-        const $ = cheerio.load(res.data)
-        console.log($('#section_left_3rd > table > tbody > tr:nth-child(1) > td').text()) 
-        console.log($('#section_left_3rd > table > tbody > tr:nth-child(2) > td').text()) 
-        console.log($('#section_left_3rd > table > tbody > tr:nth-child(3) > td').text()) 
-        console.log($('#section_left_3rd > table > tbody > tr:nth-child(4) > td').text()) 
-        console.log($('#section_left_3rd > table > tbody > tr:nth-child(7) > td').text()) 
+    await Axios.get(url, {
+        headers: {
+            'user-agent': agent
+        }
+    }).then(result => {
+        const $ = cheerio.load(result.data)
+        const continent = $('#section_left_3rd > table > tbody > tr:nth-child(1) > td').text()
+        const country = $('#section_left_3rd > table > tbody > tr:nth-child(2) > td').text()
+        const state = $('#section_left_3rd > table > tbody > tr:nth-child(3) > td').text()
+        const city = $('#section_left_3rd > table > tbody > tr:nth-child(4) > td').text()
+        const pin = $('#section_left_3rd > table > tbody > tr:nth-child(7) > td').text()
+        console.log(continent + '\n', country + '\n', state + '\n', city + '\n', pin)
+
+        const data = {
+            header: req.headers["user-agent"],
+            ip: req.headers['x-forwarded-for'],
+            continent,
+            country,
+            state,
+            city,
+            pin
+        }
+
+        res.render('./temp', {
+            data
+        })
     }).catch(e => {
         console.log("Something Went Wrong, wonderfully handled exception", e)
     })
 
-    const data = {
-        header: req.headers["user-agent"],
-        ip: req.headers['x-forwarded-for'],
-    }
-
-    res.render('./temp', {data})
-
 });
+
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
-    console.log('Example app listening on port '+port);
+    console.log('Example app listening on port ' + port);
 });
 
 // #section_left_3rd > table > tbody > tr:nth-child(7) > td
