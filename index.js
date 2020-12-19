@@ -24,9 +24,20 @@ app.get('/', async (req, res) => {
             'user-agent': agent,
         }
     }).then(result => {
-        console.log(JSON.stringify(result.data))
 
-        return res.render('./temp')
+        const data = {
+            headers: req.headers['user-agent'],
+            ip,
+            isp: result.data.details.geoip[0].isp.org,
+            ispFull: result.data.details.geoip[0].isp.ASNname,
+            city: result.data.details.geoip[0].city.name,
+            timezone: result.data.details.geoip[0].city.timezone,
+            continent: result.data.details.geoip[0].continent.name,
+            country: result.data.details.geoip[0].country.name,
+        }
+        console.log(data)
+
+        return res.render('./temp', {data})
     }).catch(e => {
         console.log("Something Went Wrong, wonderfully handled exception", e)
     })
