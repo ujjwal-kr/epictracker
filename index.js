@@ -45,7 +45,7 @@ app.get('/', async (req, res) => {
     //         isp
     //     }
 
-    await Axios.get("https://positive-vibes-server.herokuapp.com").then(result => {
+    await Axios.get(url).then(result => {
         console.log(result.data)
     })
 
