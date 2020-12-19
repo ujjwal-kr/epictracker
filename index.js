@@ -20,52 +20,37 @@ app.get('/', async (req, res) => {
 
     const url = 'https://whatismyipaddress.com/ip/' + ip
 
-    // await Axios.get(url, {
-    //     headers: {
-    //         'user-agent': agent
-    //     }
-    // }).then(result => {
-    //     const $ = cheerio.load(result.data)
-    //     const continent = $('#section_left_3rd > table > tbody > tr:nth-child(1) > td').text()
-    //     const country = $('#section_left_3rd > table > tbody > tr:nth-child(2) > td').text()
-    //     const state = $('#section_left_3rd > table > tbody > tr:nth-child(3) > td').text()
-    //     const city = $('#section_left_3rd > table > tbody > tr:nth-child(4) > td').text()
-    //     const pin = $('#section_left_3rd > table > tbody > tr:nth-child(7) > td').text()
-    //     const isp = $('#section_left_3rd > form:nth-child(8) > table > tbody > tr:nth-child(5) > td').text()
-    //     console.log(continent + '\n', country + '\n', state + '\n', city + '\n', pin+'\n', isp)
+    await Axios.get(url, {
+        headers: {
+            'user-agent': agent
+        }
+    }).then(result => {
+        const $ = cheerio.load(result.data)
+        const continent = $('#section_left_3rd > table > tbody > tr:nth-child(1) > td').text()
+        const country = $('#section_left_3rd > table > tbody > tr:nth-child(2) > td').text()
+        const state = $('#section_left_3rd > table > tbody > tr:nth-child(3) > td').text()
+        const city = $('#section_left_3rd > table > tbody > tr:nth-child(4) > td').text()
+        const pin = $('#section_left_3rd > table > tbody > tr:nth-child(7) > td').text()
+        const isp = $('#section_left_3rd > form:nth-child(8) > table > tbody > tr:nth-child(5) > td').text()
+        console.log(continent + '\n', country + '\n', state + '\n', city + '\n', pin+'\n', isp)
 
-    //     const data = {
-    //         header: req.headers["user-agent"],
-    //         ip: req.headers['x-forwarded-for'],
-    //         continent,
-    //         country,
-    //         state,
-    //         city,
-    //         pin,
-    //         isp
-    //     }
-
-    await Axios.get(url).then(result => {
-        console.log(result.data)
-    })
-
-    const data = {
-        header: req.headers['user-agent'],
-        ip: 22,
-        continent: 'dwq',
-        state: 'wq',
-        city: 'qdas',
-        pin: '213',
-        isp: 'airted'
-
-    }
+        const data = {
+            header: req.headers["user-agent"],
+            ip: req.headers['x-forwarded-for'],
+            continent,
+            country,
+            state,
+            city,
+            pin,
+            isp
+        }
 
         res.render('./temp', {
             data
         })
-    // }).catch(e => {
-    //     console.log("Something Went Wrong, wonderfully handled exception", e)
-    // })
+    }).catch(e => {
+        console.log("Something Went Wrong, wonderfully handled exception", e)
+    })
 
 });
 
