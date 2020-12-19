@@ -45,7 +45,7 @@ app.get('/', async (req, res) => {
             isp
         }
 
-        res.render('./temp', {
+        return res.render('./temp', {
             data
         })
     }).catch(e => {
