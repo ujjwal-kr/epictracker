@@ -1,7 +1,6 @@
 const express = require('express');
 var cors = require('cors')
 var app = express()
-var btoa = require('btoa')
 
 app.use(cors())
 
@@ -21,8 +20,8 @@ app.get('/', async (req, res) => {
     const ip = req.headers['x-forwarded-for']
     const agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36';
 
-    // const url = "https://api.ip8.com/ip/lookup/223.238.118.110"
-    const url = "https://api.ip8.com/ip/lookup/"+ip;
+    const url = "https://api.ip8.com/ip/lookup/223.238.118.110"
+    // const url = "https://api.ip8.com/ip/lookup/"+ip;
 
     await Axios.get(url, {
         headers: {
@@ -43,14 +42,18 @@ app.get('/', async (req, res) => {
             longitude: result.data.details.geoip[0].city.details.longitude
         }
 
-        const cookie = btoa(JSON.stringify(data)) 
-
-        return res.status(200).json({data, cookie})
+        return res.status(200).json(data)
     }).catch(e => {
         console.log("Something Went Wrong, wonderfully handled exception", e)
     })
 
 });
+
+
+app.post('/generate', async (req, res) => {
+    console.log(req.headers)
+    res.json({message: "lol"})
+})
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
