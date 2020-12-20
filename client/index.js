@@ -79,7 +79,7 @@ nowFetch().then(response => {
     bakeCookie(data).then(res => {
         document.cookie = `monstercookie=${res.cookie}`
         console.log(document.cookie)
-        const cookiePhrase = `The cookie I stored to itentify you: ${document.cookie}.`;
+        const cookiePhrase = `The cookie I stored to itentify you: ${res.cookie}.`;
         document.querySelector('.cookie').textContent = cookiePhrase;
     })
 })
