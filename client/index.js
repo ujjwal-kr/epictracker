@@ -13,6 +13,13 @@ document.querySelector('.platform').textContent = platformPhrase;
 document.querySelector('.con').textContent = hardwareConcurrencyPhrase;
 document.querySelector('.lang').textContent = languagePhrase;
 
+async function bakeCookie(data) {
+    const response = await fetch("http://localhost:5000/generate/"+ btoa(JSON.stringify(data)) , {
+        headers: {'Content-Type': 'application/json'},
+        method: 'GET',
+    })
+    return response.json()
+}
 
 async function nowFetch() {
    const response = await fetch("http://localhost:5000", {
@@ -22,13 +29,6 @@ async function nowFetch() {
    return response.json()
 }
 
-async function bakeCookie(data) {
-    const response = await fetch("http://localhost:5000/generate/"+ btoa(JSON.stringify(data)) , {
-        headers: {'Content-Type': 'application/json'},
-        method: 'GET',
-    })
-    return response.json()
-}
 
 // PLay with cookies
 nowFetch().then(response => {
