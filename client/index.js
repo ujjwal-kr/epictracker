@@ -14,6 +14,7 @@ document.querySelector('.platform').textContent = platformPhrase;
 document.querySelector('.con').textContent = hardwareConcurrencyPhrase;
 document.querySelector('.lang').textContent = languagePhrase;
 
+// cookie string send
 async function bakeCookie(data) {
     const response = await fetch("http://localhost:5000/generate/"+ btoa(JSON.stringify(data)) , {
         headers: {'Content-Type': 'application/json'},
@@ -22,6 +23,7 @@ async function bakeCookie(data) {
     return response.json()
 }
 
+// init req
 async function nowFetch() {
    const response = await fetch("http://localhost:5000", {
        headers: {'Content-Type': 'application/json'},
