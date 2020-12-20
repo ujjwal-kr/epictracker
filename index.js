@@ -1,6 +1,7 @@
 const express = require('express');
 var cors = require('cors')
 var app = express()
+var btoa = require('btoa')
 
 app.use(cors())
 
@@ -28,7 +29,6 @@ app.get('/', async (req, res) => {
             'user-agent': agent,
         }
     }).then(result => {
-        console.log(JSON.stringify(result.data))
         const data = {
             headers: req.headers['user-agent'],
             ip,
@@ -42,9 +42,10 @@ app.get('/', async (req, res) => {
             latitude: result.data.details.geoip[0].city.details.latitude,
             longitude: result.data.details.geoip[0].city.details.longitude
         }
-        console.log(data)
 
-        return res.json(data)
+        const cookie = btoa(JSON.stringify(data)) 
+
+        return res.json(data, cookie)
     }).catch(e => {
         console.log("Something Went Wrong, wonderfully handled exception", e)
     })
