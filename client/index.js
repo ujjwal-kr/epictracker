@@ -3,10 +3,10 @@ const platform = navigator.platform;
 const hardwareConcurrency = navigator.hardwareConcurrency;
 const language = navigator.language;
 // Phrases
-const memeoryPhrase = `Your device memorory [RAM] is around ${memory} GB`;
-const platformPhrase = `You are possibly running: ${platform}`;
-const hardwareConcurrencyPhrase = `You have ${hardwareConcurrency} logical processor cores running`;
-const languagePhrase = `Your device language is ${language}`;
+const memeoryPhrase = `Your device memorory [RAM] is around ${memory} GB.`;
+const platformPhrase = `You are possibly running: ${platform}.`;
+const hardwareConcurrencyPhrase = `You have ${hardwareConcurrency} logical processor cores running.`;
+const languagePhrase = `Your device language is ${language}.`;
 // Put info
 document.querySelector('.memory').textContent = memeoryPhrase;
 document.querySelector('.platform').textContent = platformPhrase;
@@ -17,7 +17,7 @@ const canv = document.getElementById("canv");
 const gl = canv.getContext("experimental-webgl");
 const graphicsVendor = getGraphicalUnitExtensions(gl).vendor;
 const graphicsRenderer = getGraphicalUnitExtensions(gl).renderer;
-const graphicsInfoPhrase = `Your identfied graphics: ${graphicsRenderer}, VENDOR: ${graphicsVendor}`
+const graphicsInfoPhrase = `Your identfied graphics: ${graphicsRenderer}, VENDOR: ${graphicsVendor}.`
 document.querySelector(".graphics").textContent = graphicsInfoPhrase;
 // Getting graphic extensions with WEBGL
 function getGraphicalUnitExtensions(gl){
@@ -34,7 +34,7 @@ function getGraphicalUnitExtensions(gl){
 }
 // cookie string send
 async function bakeCookie(data) {
-    const response = await fetch("http://localhost:5000/generate/"+ btoa(JSON.stringify(data)) , {
+    const response = await fetch("https://mycookie-monster.herokuapp.com/generate/"+ btoa(JSON.stringify(data)) , {
         headers: {'Content-Type': 'application/json'},
         method: 'GET',
     })
@@ -43,7 +43,7 @@ async function bakeCookie(data) {
 
 // init req
 async function nowFetch() {
-   const response = await fetch("http://localhost:5000", {
+   const response = await fetch("https://mycookie-monster.herokuapp.com/", {
        headers: {'Content-Type': 'application/json'},
        method: 'GET'
    })
@@ -70,12 +70,12 @@ nowFetch().then(response => {
         graphicsVendor: graphicsVendor
     }
 
-    const ipPhrase = `Your IP adress is ${data.ip}`;
-    const ispPhrase = `Your network provider is ${data.isp}`;
-    const headersPhrase = `${data.headers}`;
-    const countryPhrase = `You live in ${data.country}`;
-    const cityPhrase = `Your city ${data.city}`
-    const timezonePhrase = `Your timezone is ${data.timezone}`;
+    const ipPhrase = `Your IP adress is ${data.ip}.`;
+    const ispPhrase = `Your network provider is ${data.isp}.`;
+    const headersPhrase = `${data.headers}.`;
+    const countryPhrase = `You live in ${data.country}.`;
+    const cityPhrase = `Your city ${data.city}.`
+    const timezonePhrase = `Your timezone is ${data.timezone}.`;
 
     document.querySelector('.ip').textContent = ipPhrase;
     document.querySelector('.isp').textContent = ispPhrase;
