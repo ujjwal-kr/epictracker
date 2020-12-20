@@ -54,20 +54,11 @@ async function nowFetch() {
 // PLay with cookies
 nowFetch().then(response => {
     const data = {
-        headers: response.headers,
-        ip: response.ip,
-        isp: response.isp,
-        city: response.city,
-        country: response.country,
-        latitude: response.latitude,
-        longitude: response.longitude,
-        timezone: response.timezone,
-        memory: memory,
-        platform: platform,
-        hardwareConcurrency: hardwareConcurrency,
-        language: language,
-        graphics: graphicsRenderer,
-        graphicsVendor: graphicsVendor
+        headers: response.headers, ip: response.ip,isp: response.isp,
+        city: response.city,country: response.country,latitude: response.latitude,
+        longitude: response.longitude,timezone: response.timezone,memory: memory,
+        platform: platform,hardwareConcurrency: hardwareConcurrency,language: language,
+        graphics: graphicsRenderer,graphicsVendor: graphicsVendor
     }
 
     const ipPhrase = `Your IP adress is ${data.ip}.`;
@@ -88,5 +79,7 @@ nowFetch().then(response => {
     bakeCookie(data).then(res => {
         document.cookie = `monstercookie=${res.cookie}`
         console.log(document.cookie)
+        const cookiePhrase = `The cookie I stored to itentify you: ${document.cookie}.`;
+        document.querySelector('.cookie').textContent = cookiePhrase;
     })
 })
