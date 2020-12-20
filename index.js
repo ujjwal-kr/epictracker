@@ -51,8 +51,8 @@ app.get('/', async (req, res) => {
 
 
 app.get('/generate/:data', async (req, res) => {
-    console.log(req.params.data)
-    res.json({message: "lol"})
+    console.log(req.params.data) // this can be stored in the Database now
+    res.json({cookie: req.params.data})
 })
 
 const port = process.env.PORT || 4000;

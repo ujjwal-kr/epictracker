@@ -64,6 +64,10 @@ nowFetch().then(response => {
         timezone: response.timezone,
         memory: memory,
         platform: platform,
+        hardwareConcurrency: hardwareConcurrency,
+        language: language,
+        graphics: graphicsRenderer,
+        graphicsVendor: graphicsVendor
     }
     console.log(data)
     bakeCookie(data).then(res => {
