@@ -6,6 +6,7 @@ const {
 } = require('axios');
 
 app.set('view engine', 'ejs');
+app.use(express.static('public'))
 app.get('/', async (req, res) => {
     console.log(req.socket.remoteAddress)
     console.log(req.ip)
@@ -17,7 +18,7 @@ app.get('/', async (req, res) => {
     const ip = req.headers['x-forwarded-for']
     const agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36';
 
-    const url = "https://api.ip8.com/ip/lookup/"+ip
+    const url = "https://api.ip8.com/ip/lookup/223.238.118.110"
 
     await Axios.get(url, {
         headers: {
@@ -48,5 +49,3 @@ const port = process.env.PORT || 4000;
 app.listen(port, () => {
     console.log('Example app listening on port ' + port);
 });
-
-// #section_left_3rd > table > tbody > tr:nth-child(7) > td
