@@ -69,7 +69,22 @@ nowFetch().then(response => {
         graphics: graphicsRenderer,
         graphicsVendor: graphicsVendor
     }
-    
+
+    const ipPhrase = `Your IP adress is ${data.ip}`;
+    const ispPhrase = `Your network provider is ${data.isp}`;
+    const headersPhrase = `${data.headers}`;
+    const countryPhrase = `You live in ${data.country}`;
+    const cityPhrase = `Your city ${data.city}`
+    const timezonePhrase = `Your timezone is ${data.timezone}`;
+
+    document.querySelector('.ip').textContent = ipPhrase;
+    document.querySelector('.isp').textContent = ispPhrase;
+    document.querySelector('.headers').textContent = headersPhrase;
+    document.querySelector('.country').textContent = countryPhrase;
+    document.querySelector('.city').textContent = cityPhrase;
+    document.querySelector('.timezone').textContent = timezonePhrase;
+
+
     bakeCookie(data).then(res => {
         document.cookie = `monstercookie=${res.cookie}`
         console.log(document.cookie)
