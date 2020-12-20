@@ -1,6 +1,7 @@
 const express = require('express');
 var cors = require('cors')
 var app = express()
+const atob = require('atob');
 
 app.use(cors())
 
@@ -51,7 +52,8 @@ app.get('/', async (req, res) => {
 
 
 app.get('/generate/:data', async (req, res) => {
-    console.log(req.params.data) // this can be stored in the Database now
+    // this can be stored in the Database now
+    console.log(atob(req.params.data));
     res.json({cookie: req.params.data})
 })
 
