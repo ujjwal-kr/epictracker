@@ -39,6 +39,8 @@ app.get('/', async (req, res) => {
             timezone: result.data.details.geoip[0].city.timezone,
             continent: result.data.details.geoip[0].continent.name,
             country: result.data.details.geoip[0].country.name,
+            latitude: result.data.details.geoip[0].city.details.latitude,
+            longitude: result.data.details.geoip[0].city.details.longitude
         }
         console.log(data)
 
