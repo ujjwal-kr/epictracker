@@ -50,8 +50,8 @@ app.get('/', async (req, res) => {
 });
 
 
-app.post('/generate', async (req, res) => {
-    console.log(req.headers)
+app.get('/generate/:data', async (req, res) => {
+    console.log(req.params.data)
     res.json({message: "lol"})
 })
 

@@ -42,11 +42,12 @@ async function nowFetch() {
    return response.json()
 }
 
+
+
 async function postData(data) {
-    const response = await fetch("http://localhost:5000/generate/", {
+    const response = await fetch("http://localhost:5000/generate/"+ btoa(JSON.stringify(data)) , {
         headers: {'Content-Type': 'application/json'},
-        method: 'POST',
-        body: (JSON.stringify(data))
+        method: 'GET',
     })
     return response.json()
 }
