@@ -69,8 +69,9 @@ nowFetch().then(response => {
         graphics: graphicsRenderer,
         graphicsVendor: graphicsVendor
     }
-    console.log(data)
+    
     bakeCookie(data).then(res => {
-        console.log(res)
+        document.cookie = `monstercookie=${res.cookie}`
+        console.log(document.cookie)
     })
 })
