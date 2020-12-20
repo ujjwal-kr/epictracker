@@ -1,13 +1,14 @@
+// Get info 
 const memory = navigator.deviceMemory;
 const platform = navigator.platform;
 const hardwareConcurrency = navigator.hardwareConcurrency;
 const language = navigator.language;
-
+// Phrases
 const memeoryPhrase = `Your device memorory [RAM] is around ${memory} GB`;
 const platformPhrase = `You are possibly running: ${platform}`;
 const hardwareConcurrencyPhrase = `You have ${hardwareConcurrency} logical processor cores`;
 const languagePhrase = `Your device language is ${language}`
-
+// Put info
 document.querySelector('.memory').textContent = memeoryPhrase;
 document.querySelector('.platform').textContent = platformPhrase;
 document.querySelector('.con').textContent = hardwareConcurrencyPhrase;
