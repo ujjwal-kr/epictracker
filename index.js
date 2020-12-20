@@ -9,8 +9,6 @@ const {
     default: Axios
 } = require('axios');
 
-app.set('view engine', 'ejs');
-app.use(express.static('public'))
 app.get('/', async (req, res) => {
     console.log(req.socket.remoteAddress)
     console.log(req.ip)
@@ -44,7 +42,7 @@ app.get('/', async (req, res) => {
         }
         console.log(data)
 
-        return res.render('./temp', {data})
+        return res.json(data)
     }).catch(e => {
         console.log("Something Went Wrong, wonderfully handled exception", e)
     })
