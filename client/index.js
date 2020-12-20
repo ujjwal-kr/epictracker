@@ -1,14 +1,31 @@
-// Get and display the stuff
-
 const memory = navigator.deviceMemory;
 const platform = navigator.platform;
+const hardwareConcurrency = navigator.hardwareConcurrency;
 
-const memeoryPhrase = `Your device memorory is around ${memory}`;
-const platformPhrase = `You are running ${platform}`;
+const memeoryPhrase = `Your device memorory [RAM] is around ${memory} GB`;
+const platformPhrase = `You are possibly running: ${platform}`;
+const hardwareConcurrencyPhrase = `You have ${hardwareConcurrency} logical processor cores`
 
 document.querySelector('.memory').textContent = memeoryPhrase;
 document.querySelector('.platform').textContent = platformPhrase;
+document.querySelector('.con').textContent = hardwareConcurrencyPhrase;
 
+
+async function nowFetch() {
+   const response = await fetch("http://localhost:5000", {
+       headers: {'Content-Type': 'application/json'},
+       method: 'GET'
+   })
+   return response.json()
+}
+
+async function bakeCookie(data) {
+    const response = await fetch("http://localhost:5000/generate/"+ btoa(JSON.stringify(data)) , {
+        headers: {'Content-Type': 'application/json'},
+        method: 'GET',
+    })
+    return response.json()
+}
 
 // PLay with cookies
 nowFetch().then(response => {
@@ -25,29 +42,7 @@ nowFetch().then(response => {
         platform: platform,
     }
     console.log(data)
-    postData(data).then(res => {
+    bakeCookie(data).then(res => {
         console.log(res)
     })
 })
-
-
-
-// initial request
-
-async function nowFetch() {
-   const response = await fetch("http://localhost:5000", {
-       headers: {'Content-Type': 'application/json'},
-       method: 'GET'
-   })
-   return response.json()
-}
-
-
-
-async function postData(data) {
-    const response = await fetch("http://localhost:5000/generate/"+ btoa(JSON.stringify(data)) , {
-        headers: {'Content-Type': 'application/json'},
-        method: 'GET',
-    })
-    return response.json()
-}
