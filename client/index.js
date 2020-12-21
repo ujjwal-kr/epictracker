@@ -58,15 +58,16 @@ nowFetch().then(response => {
         city: response.city,country: response.country,latitude: response.latitude,
         longitude: response.longitude,timezone: response.timezone,memory: memory,
         platform: platform,hardwareConcurrency: hardwareConcurrency,language: language,
-        graphics: graphicsRenderer,graphicsVendor: graphicsVendor
+        graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin
     }
 
     const ipPhrase = `Your IP adress is ${data.ip}.`;
     const ispPhrase = `Your network provider is ${data.isp}.`;
     const headersPhrase = `${data.headers}.`;
     const countryPhrase = `You live in ${data.country}.`;
-    const cityPhrase = `Your city ${data.city}.`
+    const cityPhrase = `Your city is ${data.city}.`
     const timezonePhrase = `Your timezone is ${data.timezone}.`;
+    const pinPhrase = `Your pin code is around ${data.pin}`
 
     document.querySelector('.ip').textContent = ipPhrase;
     document.querySelector('.isp').textContent = ispPhrase;
@@ -74,6 +75,7 @@ nowFetch().then(response => {
     document.querySelector('.country').textContent = countryPhrase;
     document.querySelector('.city').textContent = cityPhrase;
     document.querySelector('.timezone').textContent = timezonePhrase;
+    document.querySelector('.pin').textContent = pinPhrase;
 
 
     bakeCookie(data).then(res => {
