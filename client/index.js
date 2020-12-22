@@ -28,6 +28,23 @@ const graphicsVendor = getGraphicalUnitExtensions(gl).vendor;
 const graphicsRenderer = getGraphicalUnitExtensions(gl).renderer;
 const graphicsInfoPhrase = `Your identfied graphics: ${graphicsRenderer}, VENDOR: ${graphicsVendor}.`
 document.querySelector(".graphics").textContent = graphicsInfoPhrase;
+if (deviceWidth < 990) {
+    if (window.DeviceMotionEvent) {
+        window.addEventListener('devicemotion', function(event) {
+            guessIfTheDeviceIsOnTable(
+                Math.round(event.rotationRate.beta), 
+                Math.round(event.rotationRate.alpha),
+                Math.round(event.rotationRate.gamma))
+        })
+    }
+}
+function guessIfTheDeviceIsOnTable(x,y,z) {
+    if (x === 0 && y === 0 && z === 0) {
+        return document.querySelector('.rotation-rate').textContent = `Your device is on something like a table`;
+    } else {
+        return document.querySelector('.rotation-rate').textContent = `Your device in your hands`;
+    }
+}
 // Getting graphic extensions with WEBGL
 function getGraphicalUnitExtensions(gl){
     const unMaskedInfo = {
@@ -58,8 +75,6 @@ async function nowFetch() {
    })
    return response.json()
 }
-
-
 // PLay with cookies
 nowFetch().then(response => {
     const data = {
