@@ -4,3 +4,7 @@ Demo: https://epictracker.now.sh
 - It uses modern Javascript APIs to intentify your metadata and keeps the information in a cookie, encrypting it.
 - I will make a machine learning algorithm in future which will try to match the encrypted cookies to figure out the target.
 - I may create dummy marketing services to demonstrate the (targeted ads) tracking process close to the realworld.
+
+## Current Arch-
+I use some javascript APIs which is listed in the `client` folder, as [index.js](https://github.com/ujjwal-kr/ip-sniff/blob/main/client/index.js) and sends to to a HEROKU backend, the source is in the `index.js` of the root directory. The server takes in your IP and does a quick IP lookup, also acccepts the cookie and logs in the server.
+
