@@ -2,16 +2,23 @@ const memory = navigator.deviceMemory;
 const platform = navigator.platform;
 const hardwareConcurrency = navigator.hardwareConcurrency;
 const language = navigator.language;
+const deviceWidth = screen.availWidth;
+const deviceHeight = screen.availHeight;
+const colorDepth = screen.colorDepth;
 // Phrases
 const memeoryPhrase = `Your device memorory [RAM] is around ${memory} GB.`;
 const platformPhrase = `You are possibly running: ${platform}.`;
 const hardwareConcurrencyPhrase = `You have ${hardwareConcurrency} logical processor cores running.`;
 const languagePhrase = `Your device language is ${language}.`;
+const dimentionPhrase = `Your device dimentions are ${deviceHeight} X ${deviceWidth}`;
+const colorDepthPhrase = `Your device's color depth is ${colorDepth}`;
 // Put info
 document.querySelector('.memory').textContent = memeoryPhrase;
 document.querySelector('.platform').textContent = platformPhrase;
 document.querySelector('.con').textContent = hardwareConcurrencyPhrase;
 document.querySelector('.lang').textContent = languagePhrase;
+document.querySelector('.depth').textContent = colorDepthPhrase;
+document.querySelector('.dimentions').textContent = dimentionPhrase;
 // Try to get the graphichal processing unit info
 const canv = document.getElementById("canv");
 const gl = canv.getContext("experimental-webgl");
