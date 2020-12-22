@@ -12,6 +12,8 @@ const hardwareConcurrencyPhrase = `You have ${hardwareConcurrency} logical proce
 const languagePhrase = `Your device language is ${language}.`;
 const dimentionPhrase = `Your device dimentions are ${deviceHeight} X ${deviceWidth}`;
 const colorDepthPhrase = `Your device's color depth is ${colorDepth}`;
+document.querySelector('.headers').textContent = `LOADING.............`
+document.querySelector('.pin').textContent = `LOADING...............`
 // Put info
 document.querySelector('.memory').textContent = memeoryPhrase;
 document.querySelector('.platform').textContent = platformPhrase;
@@ -65,7 +67,8 @@ nowFetch().then(response => {
         city: response.city,country: response.country,latitude: response.latitude,
         longitude: response.longitude,timezone: response.timezone,memory: memory,
         platform: platform,hardwareConcurrency: hardwareConcurrency,language: language,
-        graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin
+        graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin, deviceWidth: deviceWidth,
+        deviceHeight: deviceHeight
     }
 
     const ipPhrase = `Your IP adress is ${data.ip}.`;
