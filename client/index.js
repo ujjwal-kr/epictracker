@@ -35,15 +35,30 @@ if (deviceWidth < 990) {
                 Math.round(event.rotationRate.beta), 
                 Math.round(event.rotationRate.alpha),
                 Math.round(event.rotationRate.gamma))
+
+            getIfDeviceInAcceleration(
+                Math.round(event.acceleration.x),
+                Math.round(event.acceleration.y),
+                Math.round(event.acceleration.z),
+            )    
         })
     }
 }
 function guessIfTheDeviceIsOnTable(x,y,z) {
     if (x === 0 && y === 0 && z === 0) {
         return document.querySelector('.rotation-rate').textContent = `Your device is on something like a table`;
-    } else {
-        return document.querySelector('.rotation-rate').textContent = `Your device in your hands`;
-    }
+    } 
+    return document.querySelector('.rotation-rate').textContent = `Your device in your hands`;
+}
+function getIfDeviceInAcceleration(x,y,z) {
+    let a = x*x;
+    let b = y*y;
+    let c = z*z;
+
+    if(a+b+c > 0) {
+        return document.querySelector('.acceleration').textContent = `Your device is in accelerated motion`;
+    } 
+    document.querySelector('.acceleration').textContent = `Your device isnt accelerating`;
 }
 // Getting graphic extensions with WEBGL
 function getGraphicalUnitExtensions(gl){
@@ -66,7 +81,6 @@ async function bakeCookie(data) {
     })
     return response.json()
 }
-
 // init req
 async function nowFetch() {
    const response = await fetch("https://mycookie-monster.herokuapp.com/", {
@@ -85,7 +99,6 @@ nowFetch().then(response => {
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin, deviceWidth: deviceWidth,
         deviceHeight: deviceHeight
     }
-
     const ipPhrase = `Your IP adress is ${data.ip}.`;
     const ispPhrase = `Your network provider is ${data.isp}.`;
     const headersPhrase = `${data.headers}.`;
@@ -93,7 +106,6 @@ nowFetch().then(response => {
     const cityPhrase = `Your city is ${data.city}.`
     const timezonePhrase = `Your timezone is ${data.timezone}.`;
     const pinPhrase = `Your pin code is around ${data.pin}`
-
     document.querySelector('.ip').textContent = ipPhrase;
     document.querySelector('.isp').textContent = ispPhrase;
     document.querySelector('.headers').textContent = headersPhrase;
@@ -101,8 +113,6 @@ nowFetch().then(response => {
     document.querySelector('.city').textContent = cityPhrase;
     document.querySelector('.timezone').textContent = timezonePhrase;
     document.querySelector('.pin').textContent = pinPhrase;
-
-
     bakeCookie(data).then(res => {
         document.cookie = `monstercookie=${res.cookie}`
         console.log(document.cookie)
