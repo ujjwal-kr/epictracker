@@ -26,7 +26,20 @@ const canv = document.getElementById("canv");
 const gl = canv.getContext("experimental-webgl");
 const graphicsVendor = getGraphicalUnitExtensions(gl).vendor;
 const graphicsRenderer = getGraphicalUnitExtensions(gl).renderer;
-const graphicsInfoPhrase = `Your identfied graphics: ${graphicsRenderer}, VENDOR: ${graphicsVendor}.`
+const graphicsInfoPhrase = `Your identfied graphics: ${graphicsRenderer}, VENDOR: ${graphicsVendor}.`;
+// Getting graphic extensions with WEBGL
+function getGraphicalUnitExtensions(gl){
+    const unMaskedInfo = {
+        renderer: '',
+        vendor: '',
+    }
+    const dbgRenderInfo = gl.getExtension("WEBGL_debug_renderer_info")
+    if (dbgRenderInfo != null) {
+        unMaskedInfo.renderer = gl.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL);
+        unMaskedInfo.vendor = gl.getParameter(dbgRenderInfo.UNMASKED_VENDOR_WEBGL);
+    }
+    return unMaskedInfo;
+}
 document.querySelector(".graphics").textContent = graphicsInfoPhrase;
 if (deviceWidth < 990) {
     if (window.DeviceMotionEvent) {
@@ -59,19 +72,6 @@ function getIfDeviceInAcceleration(x,y,z) {
         return document.querySelector('.acceleration').textContent = `Your device is in accelerated motion`;
     } 
     document.querySelector('.acceleration').textContent = `Your device isnt accelerating`;
-}
-// Getting graphic extensions with WEBGL
-function getGraphicalUnitExtensions(gl){
-    const unMaskedInfo = {
-        renderer: '',
-        vendor: '',
-    }
-    const dbgRenderInfo = gl.getExtension("WEBGL_debug_renderer_info")
-    if (dbgRenderInfo != null) {
-        unMaskedInfo.renderer = gl.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL);
-        unMaskedInfo.vendor = gl.getParameter(dbgRenderInfo.UNMASKED_VENDOR_WEBGL);
-    }
-    return unMaskedInfo;
 }
 // cookie string send
 async function bakeCookie(data) {

@@ -1,13 +1,30 @@
 body {
-    margin: 2%;
     padding: 0;
+    margin: 0;
     font-family: monospace;
+}
+
+.wrapper {
+    padding: 1.5%;
+}
+
+.nav {
+    padding: 2%;
+    background: teal;
+}
+
+.nav h1 {
+    margin: 0;
+    color: white;
+}
+
+.wrapper {
+    font-size: 1.2em;
 }
 
 p {
     word-break: break-all;
 }
-
 .copy {
     text-align: center;
     width: 96%;
