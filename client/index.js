@@ -44,7 +44,7 @@ document.querySelector(".graphics").textContent = graphicsInfoPhrase;
 if (deviceWidth < 990) {
     if (window.DeviceMotionEvent) {
         window.addEventListener('devicemotion', function(event) {
-            setInterval(() => {
+            setTimeout(() => {
                 guessIfTheDeviceIsOnTable(
                     Math.round(event.rotationRate.beta), 
                     Math.round(event.rotationRate.alpha),
@@ -55,7 +55,7 @@ if (deviceWidth < 990) {
                     Math.round(event.acceleration.y),
                     Math.round(event.acceleration.z),
                 )   
-            }, 600); 
+            }, 1000); 
         })
     }
 }
