@@ -1,10 +1,11 @@
 const express = require('express');
-var cors = require('cors')
-var app = express()
+var cors = require('cors');
+var app = express();
 const atob = require('atob');
+const bodyParser = require('body-parser');
 
 app.use(cors())
-
+app.use(bodyParser.json());
 
 const {
     default: Axios
@@ -50,10 +51,10 @@ app.get('/', async (req, res) => {
 });
 
 
-app.get('/generate/:data', async (req, res) => {
+app.post('/generate', async (req, res) => {
     // this can be stored in the Database now
-    console.log(atob(req.params.data));
-    res.json({cookie: req.params.data})
+    console.log(atob(req.body.data));
+    res.json({cookie: req.body.data})
 })
 
 const port = process.env.PORT || 4000;
