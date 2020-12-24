@@ -15,6 +15,7 @@ Demo: https://epictracker.now.sh
 - Your timezone.
 - Device rotation.
 - Device Acceleration.
+- Weather information of your area.
 
 ## Is this illegal ?
 - No, it's not.
