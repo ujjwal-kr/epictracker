@@ -43,18 +43,20 @@ function getGraphicalUnitExtensions(gl){
 document.querySelector(".graphics").textContent = graphicsInfoPhrase;
 if (deviceWidth < 990) {
     if (window.DeviceMotionEvent) {
-        window.addEventListener('devicemotion', function(event) {
-            guessIfTheDeviceIsOnTable(
-                Math.round(event.rotationRate.beta), 
-                Math.round(event.rotationRate.alpha),
-                Math.round(event.rotationRate.gamma))
-
-            getIfDeviceInAcceleration(
-                Math.round(event.acceleration.x),
-                Math.round(event.acceleration.y),
-                Math.round(event.acceleration.z),
-            )    
-        })
+        setInterval(() => {
+            window.addEventListener('devicemotion', function(event) {
+                guessIfTheDeviceIsOnTable(
+                    Math.round(event.rotationRate.beta), 
+                    Math.round(event.rotationRate.alpha),
+                    Math.round(event.rotationRate.gamma))
+    
+                getIfDeviceInAcceleration(
+                    Math.round(event.acceleration.x),
+                    Math.round(event.acceleration.y),
+                    Math.round(event.acceleration.z),
+                )    
+            })
+        }, 600);
     }
 }
 function guessIfTheDeviceIsOnTable(x,y,z) {
