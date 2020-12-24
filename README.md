@@ -10,9 +10,11 @@ Demo: https://epictracker.now.sh
 - Browser information.
 - CPU and GPU.
 - Your IP address.
-- Your rough location. (Based on the IP address)
-- Your internet provider name
-- Your timezone
+- Your rough location. (Based on the IP address).
+- Your internet provider name.
+- Your timezone.
+- Device rotation.
+- Device Acceleration.
 
 ## Is this illegal ?
 - No, it's not.
