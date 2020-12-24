@@ -19,13 +19,22 @@ body {
 }
 
 .wrapper {
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 
 p {
     word-break: break-all;
 }
+.cookie {
+    font-size: .9em;
+}
 .copy {
     text-align: center;
     width: 96%;
+}
+
+@media all and (max-width: 990px) {
+    .nav {
+        padding: 3.5%;
+    }
 }
