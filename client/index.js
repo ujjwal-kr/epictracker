@@ -43,8 +43,8 @@ function getGraphicalUnitExtensions(gl){
 document.querySelector(".graphics").textContent = graphicsInfoPhrase;
 if (deviceWidth < 990) {
     if (window.DeviceMotionEvent) {
-        setInterval(() => {
-            window.addEventListener('devicemotion', function(event) {
+        window.addEventListener('devicemotion', function(event) {
+            setInterval(() => {
                 guessIfTheDeviceIsOnTable(
                     Math.round(event.rotationRate.beta), 
                     Math.round(event.rotationRate.alpha),
@@ -54,9 +54,9 @@ if (deviceWidth < 990) {
                     Math.round(event.acceleration.x),
                     Math.round(event.acceleration.y),
                     Math.round(event.acceleration.z),
-                )    
-            })
-        }, 600);
+                )   
+            }, 600); 
+        })
     }
 }
 function guessIfTheDeviceIsOnTable(x,y,z) {
