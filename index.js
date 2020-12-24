@@ -27,22 +27,30 @@ app.get('/', async (req, res) => {
         headers: {
             'user-agent': agent,
         }
-    }).then(result => {
-        const data = {
-            headers: req.headers['user-agent'],
-            ip,
-            isp: result.data.details.geoip[0].isp.org,
-            ispFull: result.data.details.geoip[0].isp.ASNname,
-            city: result.data.details.geoip[0].city.name,
-            pin: result.data.details.geoip[0].city.zip,
-            timezone: result.data.details.geoip[0].city.timezone,
-            continent: result.data.details.geoip[0].continent.name,
-            country: result.data.details.geoip[0].country.name,
-            latitude: result.data.details.geoip[0].city.details.latitude,
-            longitude: result.data.details.geoip[0].city.details.longitude
-        }
-
-        return res.status(200).json(data)
+    }).then(async result => {
+        await Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${result.data.details.geoip[0].city.name}&appid=84f0c05e16abc57b03ca8fa00b59f78e&units=metric`).then((weather) => {
+            console.log(weather.data.weather[0].description)
+            console.log(weather.data.main.temp)
+            const data = {
+                headers: req.headers['user-agent'],
+                ip,
+                isp: result.data.details.geoip[0].isp.org,
+                ispFull: result.data.details.geoip[0].isp.ASNname,
+                city: result.data.details.geoip[0].city.name,
+                pin: result.data.details.geoip[0].city.zip,
+                timezone: result.data.details.geoip[0].city.timezone,
+                continent: result.data.details.geoip[0].continent.name,
+                country: result.data.details.geoip[0].country.name,
+                latitude: result.data.details.geoip[0].city.details.latitude,
+                longitude: result.data.details.geoip[0].city.details.longitude,
+                weather: weather.data.weather[0].description,
+                temperature: weather.data.main.temp
+            }
+    
+            return res.status(200).json(data)
+        }).catch(e => {
+            console.log( "Cant get weather data lol" ,e)
+        })
     }).catch(e => {
         console.log("Something Went Wrong, wonderfully handled exception", e)
     })
