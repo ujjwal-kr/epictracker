@@ -10,8 +10,8 @@ const memeoryPhrase = `Your device memorory [RAM] is around ${memory} GB.`;
 const platformPhrase = `You are possibly running: ${platform}.`;
 const hardwareConcurrencyPhrase = `You have ${hardwareConcurrency} logical processor cores running.`;
 const languagePhrase = `Your device language is ${language}.`;
-const dimentionPhrase = `Your device dimentions are ${deviceHeight} X ${deviceWidth}`;
-const colorDepthPhrase = `Your device's color depth is ${colorDepth}`;
+const dimentionPhrase = `Your device dimentions are ${deviceHeight} X ${deviceWidth}.`;
+const colorDepthPhrase = `Your device's color depth is ${colorDepth}.`;
 document.querySelector('.headers').textContent = `LOADING.............`
 document.querySelector('.pin').textContent = `LOADING...............`
 // Put info
@@ -99,7 +99,7 @@ nowFetch().then(response => {
         longitude: response.longitude,timezone: response.timezone,memory: memory,
         platform: platform,hardwareConcurrency: hardwareConcurrency,language: language,
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin, deviceWidth: deviceWidth,
-        deviceHeight: deviceHeight
+        deviceHeight: deviceHeight, weather: response.weather, temperature: response.temperature
     }
     const ipPhrase = `Your IP adress is ${data.ip}.`;
     const ispPhrase = `Your network provider is ${data.isp}.`;
@@ -107,7 +107,9 @@ nowFetch().then(response => {
     const countryPhrase = `You live in ${data.country}.`;
     const cityPhrase = `Your city is ${data.city}.`
     const timezonePhrase = `Your timezone is ${data.timezone}.`;
-    const pinPhrase = `Your pin code is around ${data.pin}`
+    const pinPhrase = `Your pin code is around ${data.pin}.`
+    const weatherPhrase = `The weather of your area: ${data.weather}.`;
+    const temperaturePhrase = `Temperature of area: ${data.temperature} deg C.`
     document.querySelector('.ip').textContent = ipPhrase;
     document.querySelector('.isp').textContent = ispPhrase;
     document.querySelector('.headers').textContent = headersPhrase;
@@ -115,6 +117,8 @@ nowFetch().then(response => {
     document.querySelector('.city').textContent = cityPhrase;
     document.querySelector('.timezone').textContent = timezonePhrase;
     document.querySelector('.pin').textContent = pinPhrase;
+    document.querySelector('.weather').textContent = weatherPhrase;
+    document.querySelector('.temperature').textContent = temperaturePhrase;
     bakeCookie(data).then(res => {
         document.cookie = `monstercookie=${res.cookie}`
         console.log(document.cookie)
