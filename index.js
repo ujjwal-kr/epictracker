@@ -21,7 +21,6 @@ app.get('/', async (req, res) => {
     const ip = req.headers['x-forwarded-for']
     const agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36';
 
-    // const url = "https://api.ip8.com/ip/lookup/223.238.118.110"
     const url = "https://api.ip8.com/ip/lookup/"+ip;
 
     await Axios.get(url, {
