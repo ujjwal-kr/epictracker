@@ -8,7 +8,7 @@ Demo: https://epictracker.now.sh
 ## So what's taken ?
 - Your operating system information.
 - Browser information.
-- CPU and GPU.
+- CPU and GPU information.
 - Your IP address.
 - Your rough location. (Based on the IP address).
 - Your internet provider name.
