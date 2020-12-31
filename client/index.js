@@ -6,7 +6,7 @@ const deviceWidth = screen.availWidth;
 const deviceHeight = screen.availHeight;
 const colorDepth = screen.colorDepth;
 // Phrases
-const memeoryPhrase = `Your device memorory [RAM] is around ${memory} GB.`;
+const memeoryPhrase = `Your device memory [RAM] is around ${memory} GB.`;
 const platformPhrase = `You are possibly running: ${platform}.`;
 const hardwareConcurrencyPhrase = `You have ${hardwareConcurrency} logical processor cores running.`;
 const languagePhrase = `Your device language is ${language}.`;
@@ -101,7 +101,7 @@ nowFetch().then(response => {
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin, deviceWidth: deviceWidth,
         deviceHeight: deviceHeight, weather: response.weather, temperature: response.temperature
     }
-    const ipPhrase = `Your IP adress is ${data.ip}.`;
+    const ipPhrase = `Your IP address is ${data.ip}.`;
     const ispPhrase = `Your network provider is ${data.isp}.`;
     const headersPhrase = `${data.headers}.`;
     const countryPhrase = `You live in ${data.country}.`;
