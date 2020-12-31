@@ -10,7 +10,7 @@ const memeoryPhrase = `Your device memory [RAM] is around ${memory} GB.`;
 const platformPhrase = `You are possibly running: ${platform}.`;
 const hardwareConcurrencyPhrase = `You have ${hardwareConcurrency} logical processor cores running.`;
 const languagePhrase = `Your device language is ${language}.`;
-const dimentionPhrase = `Your device dimentions are ${deviceHeight} X ${deviceWidth}.`;
+const dimentionPhrase = `Your device dimensions are ${deviceHeight} X ${deviceWidth}.`;
 const colorDepthPhrase = `Your device's color depth is ${colorDepth}.`;
 document.querySelector('.headers').textContent = `LOADING.............`
 document.querySelector('.pin').textContent = `LOADING...............`
@@ -26,7 +26,7 @@ const canv = document.getElementById("canv");
 const gl = canv.getContext("experimental-webgl");
 const graphicsVendor = getGraphicalUnitExtensions(gl).vendor;
 const graphicsRenderer = getGraphicalUnitExtensions(gl).renderer;
-const graphicsInfoPhrase = `Your identfied graphics: ${graphicsRenderer}, VENDOR: ${graphicsVendor}.`;
+const graphicsInfoPhrase = `Your identified graphics: ${graphicsRenderer}, VENDOR: ${graphicsVendor}.`;
 // Getting graphic extensions with WEBGL
 function getGraphicalUnitExtensions(gl){
     const unMaskedInfo = {
@@ -122,7 +122,7 @@ nowFetch().then(response => {
     bakeCookie(data).then(res => {
         document.cookie = `monstercookie=${res.cookie}`
         console.log(document.cookie)
-        const cookiePhrase = `The cookie I stored to itentify you: ${res.cookie}.`;
+        const cookiePhrase = `The cookie I stored to identify you: ${res.cookie}.`;
         document.querySelector('.cookie').textContent = cookiePhrase;
     })
 })
