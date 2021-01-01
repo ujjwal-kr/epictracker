@@ -64,7 +64,7 @@ app.get('/generate/:data', async (req, res) => {    // Because URL PARAMS ARE CO
     console.log(atob(req.params.data));
     res.json({cookie: req.params.data})
 })
-``
+
 app.get('/if-vpn/:data', async(req, res) => {
     const data = atob(req.params.data)
     // Timezone Stuff
@@ -80,7 +80,7 @@ app.get('/if-vpn/:data', async(req, res) => {
     formatter = new Intl.DateTimeFormat([], options);
     const stringTime = formatter.format(new Date());
     const IPtime = Date.parse(stringTime)
-    console.log(IPtime)
+    console.log(time)
     return res.json({message: "yay i work"})
 })
 
