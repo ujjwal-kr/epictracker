@@ -64,21 +64,23 @@ app.get('/generate/:data', async (req, res) => {    // Because URL PARAMS ARE CO
     console.log(atob(req.params.data));
     res.json({cookie: req.params.data})
 })
-
+``
 app.get('/if-vpn/:data', async(req, res) => {
     const data = atob(req.params.data)
     // Timezone Stuff
     let options = {
         timeZone: data.timezone,
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
+        month: 'numeric',
         second: 'numeric',
+        year: 'numeric',
+        day: 'numeric'
     },
     formatter = new Intl.DateTimeFormat([], options);
-    console.log(formatter.format(new Date()));
+    const stringTime = formatter.format(new Date());
+    const IPtime = Date.parse(stringTime)
+    console.log(IPtime)
     return res.json({message: "yay i work"})
 })
 
