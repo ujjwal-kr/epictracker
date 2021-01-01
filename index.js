@@ -58,13 +58,17 @@ app.get('/', async (req, res) => {
 });
 
 
-app.get('/generate/:data', async (req, res) => {
+app.get('/generate/:data', async (req, res) => {    // Because URL PARAMS ARE COOLER
     // this can be stored in the Database now
     console.log(atob(req.params.data));
     res.json({cookie: req.params.data})
 })
 
+app.get('/if-vpn/:data', async(req, res) => {
+    return res.json({message: "yay i work"})
+})
+
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
-    console.log('Example app listening on port ' + port);
+    console.log(`Waiting on port for someone :) ${port}`);
 });
