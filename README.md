@@ -1,4 +1,4 @@
-# ip-sniff
+# EpicTracker [ip-sniff]
 Demo: https://epictracker.now.sh
 - It is a demontstration project of how can I track you using fingerprinting and some automated lookups and stuff.
 - It uses modern Javascript APIs to intentify your metadata and keeps the information in a cookie, encrypting it.
