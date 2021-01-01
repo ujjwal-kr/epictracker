@@ -8,13 +8,14 @@ Demo: https://epictracker.now.sh
 ## So what's taken ?
 - Your operating system information.
 - Browser information.
-- CPU and GPU.
+- CPU and GPU information.
 - Your IP address.
 - Your rough location. (Based on the IP address).
 - Your internet provider name.
 - Your timezone.
 - Device rotation.
 - Device Acceleration.
+- Weather information of your area.
 
 ## How can stop we stop you from tracking us?
 - Use A VPN [your information wont be visible but probably I will detect if you are using one ;) ]
