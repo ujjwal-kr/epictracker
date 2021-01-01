@@ -83,7 +83,7 @@ async function bakeCookie(data) {
     return response.json()
 }
 // VPN
-function ifVpn(data) {
+async function ifVpn(data) {
     const response = await fetch("http://localhost:5000/if-vpn/"+ btoa(JSON.stringify(data)), {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
