@@ -21,7 +21,7 @@ Demo: https://epictracker.now.sh
 - Use A VPN [your information wont be visible but probably I will detect if you are using one ;) ]
 - Find ways to disable fingerprinting in your browser, which is tough.
 
-## How can I stop Google and Facebook from stop tracking us?
+## How can I stop Google and Facebook from tracking us?
 - *You Can't*
 
 ## Is this illegal ?
