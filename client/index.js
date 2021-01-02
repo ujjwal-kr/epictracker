@@ -156,7 +156,9 @@ nowFetch().then(response => {
     }
     if(diff > 50000) {
         console.log("YAY VPN")
+        document.querySelector('.VPN').textContent = `You ARE using a VPN`
     }else {
         console.log("NO VPN")
+        document.querySelector('.VPN').textContent = `You donot seem to Use a VPN`
     }
 })
