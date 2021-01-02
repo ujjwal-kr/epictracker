@@ -81,8 +81,10 @@ app.get('/if-vpn/:data', async(req, res) => {
     const stringTime = formatter.format(new Date());
     const IPtime = Date.parse(stringTime)
     let dif = IPtime - data.deviceTime;
+    console.log(dif)
     if (dif < 0) {
         dif = -1*dif
+        console.log(dif)
     }
     if (dif > 50000) {
         return res.json({message: 'yay VPN'})

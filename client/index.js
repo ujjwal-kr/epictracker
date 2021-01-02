@@ -76,7 +76,7 @@ function getIfDeviceInAcceleration(x,y,z) {
 }
 // cookie string send
 async function bakeCookie(data) {
-    const response = await fetch("http://localhost:5000/generate/"+ btoa(JSON.stringify(data)) , {
+    const response = await fetch("https://mycookie-monster.herokuapp.com/generate/"+ btoa(JSON.stringify(data)) , {
         headers: {'Content-Type': 'application/json'},
         method: 'GET',
     })
@@ -84,7 +84,7 @@ async function bakeCookie(data) {
 }
 // VPN
 async function ifVpn(data) {
-    const response = await fetch("http://localhost:5000/if-vpn/"+ btoa(JSON.stringify(data)), {
+    const response = await fetch("https://mycookie-monster.herokuapp.com/if-vpn/"+ btoa(JSON.stringify(data)), {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     })
@@ -92,7 +92,7 @@ async function ifVpn(data) {
 }
 // init req
 async function nowFetch() {
-   const response = await fetch("http://localhost:5000/", {
+   const response = await fetch("https://mycookie-monster.herokuapp.com/", {
        headers: {'Content-Type': 'application/json'},
        method: 'GET'
    })
