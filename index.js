@@ -22,7 +22,7 @@ app.get('/', async (req, res) => {
     const agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36';
 
     // const url = "https://api.ip8.com/ip/lookup/"+ip;
-    const url = "https://api.ip8.com/ip/lookup/223.238.97.18";
+    const url = "https://api.ip8.com/ip/lookup/176.10.112.40";
 
     await Axios.get(url, {
         headers: {
@@ -66,7 +66,8 @@ app.get('/generate/:data', async (req, res) => {    // Because URL PARAMS ARE CO
 })
 
 app.get('/if-vpn/:data', async(req, res) => {
-    const data = atob(req.params.data)
+    const data = JSON.parse(atob(req.params.data))
+    console.log(data)
     // Timezone Stuff
     let options = {
         timeZone: data.timezone,
@@ -80,7 +81,8 @@ app.get('/if-vpn/:data', async(req, res) => {
     formatter = new Intl.DateTimeFormat([], options);
     const stringTime = formatter.format(new Date());
     const IPtime = Date.parse(stringTime)
-    console.log(time)
+    console.log(IPtime)
+    console.log(stringTime)
     return res.json({message: "yay i work"})
 })
 
