@@ -80,6 +80,7 @@ app.get('/if-vpn/:data', async(req, res) => {
     const stringTime = formatter.format(new Date());
     const IPtime = Date.parse(stringTime)
     let dif = IPtime - data.deviceTime;
+    console.log(stringTime)
     console.log(dif)
     console.log(IPtime)
     if (dif < 0) {
