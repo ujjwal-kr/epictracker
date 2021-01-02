@@ -68,7 +68,6 @@ app.get('/generate/:data', async (req, res) => {    // Because URL PARAMS ARE CO
 app.get('/if-vpn/:data', async(req, res) => {
     const data = JSON.parse(atob(req.params.data))
     console.log(data)
-    // Timezone Stuff
     let options = {
         timeZone: data.timezone,
         hour: 'numeric',
@@ -81,9 +80,14 @@ app.get('/if-vpn/:data', async(req, res) => {
     formatter = new Intl.DateTimeFormat([], options);
     const stringTime = formatter.format(new Date());
     const IPtime = Date.parse(stringTime)
-    console.log(IPtime)
-    console.log(stringTime)
-    return res.json({message: "yay i work"})
+    let dif = IPtime - data.deviceTime;
+    if (dif < 0) {
+        dif = -1*dif
+    }
+    if (dif > 50000) {
+        return res.json({message: 'yay VPN'})
+    }
+    return res.json({message: "no VPN"})
 })
 
 const port = process.env.PORT || 4000;
