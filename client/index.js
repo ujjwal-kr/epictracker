@@ -82,14 +82,6 @@ async function bakeCookie(data) {
     })
     return response.json()
 }
-// VPN
-async function ifVpn(data) {
-    const response = await fetch("https://mycookie-monster.herokuapp.com/if-vpn/"+ btoa(JSON.stringify(data)), {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'}
-    })
-    return response.json()
-}
 // init req
 async function nowFetch() {
    const response = await fetch("https://mycookie-monster.herokuapp.com/", {
@@ -132,9 +124,28 @@ nowFetch().then(response => {
         const cookiePhrase = `The cookie I stored to identify you: ${res.cookie}.`;
         document.querySelector('.cookie').textContent = cookiePhrase;
     })
+    // VPN DETECTION
     const date = new Date(Date.now())
-    console.log(date.getHours())
     const vpnData = {timezone: data.timezone, deviceTime: date.getTime()}
-    console.log(vpnData)
-    ifVpn(vpnData).then(res => { console.log(res) })
+    let options = {
+        timeZone: vpnData.timezone,
+        hour: 'numeric',
+        minute: 'numeric',
+        month: 'numeric',
+        second: 'numeric',
+        year: 'numeric',
+        day: 'numeric'
+    };
+    formatter = new Intl.DateTimeFormat([], options);
+    const stringTime = formatter.format(new Date());
+    const IPtime = Date.parse(stringTime)
+    let diff = IPtime - Date.now()
+    if (diff < 0) {
+        diff = -1*diff
+    }
+    if(diff > 50000) {
+        console.log("YAY VPN")
+    }else {
+        console.log("NO VPN")
+    }
 })
