@@ -67,7 +67,6 @@ app.get('/generate/:data', async (req, res) => {    // Because URL PARAMS ARE CO
 
 app.get('/if-vpn/:data', async(req, res) => {
     const data = JSON.parse(atob(req.params.data))
-    console.log(data)
     let options = {
         timeZone: data.timezone,
         hour: 'numeric',
@@ -82,6 +81,7 @@ app.get('/if-vpn/:data', async(req, res) => {
     const IPtime = Date.parse(stringTime)
     let dif = IPtime - data.deviceTime;
     console.log(dif)
+    console.log(IPtime)
     if (dif < 0) {
         dif = -1*dif
         console.log(dif)
