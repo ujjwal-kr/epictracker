@@ -6,11 +6,11 @@ const deviceWidth = screen.availWidth;
 const deviceHeight = screen.availHeight;
 const colorDepth = screen.colorDepth;
 // Phrases
-const memeoryPhrase = `Your device memorory [RAM] is around ${memory} GB.`;
+const memeoryPhrase = `Your device memory [RAM] is around ${memory} GB.`;
 const platformPhrase = `You are possibly running: ${platform}.`;
 const hardwareConcurrencyPhrase = `You have ${hardwareConcurrency} logical processor cores running.`;
 const languagePhrase = `Your device language is ${language}.`;
-const dimentionPhrase = `Your device dimentions are ${deviceHeight} X ${deviceWidth}.`;
+const dimentionPhrase = `Your device dimensions are ${deviceHeight} X ${deviceWidth}.`;
 const colorDepthPhrase = `Your device's color depth is ${colorDepth}.`;
 document.querySelector('.headers').textContent = `LOADING.............`
 document.querySelector('.pin').textContent = `LOADING...............`;
@@ -26,7 +26,7 @@ const canv = document.getElementById("canv");
 const gl = canv.getContext("experimental-webgl");
 const graphicsVendor = getGraphicalUnitExtensions(gl).vendor;
 const graphicsRenderer = getGraphicalUnitExtensions(gl).renderer;
-const graphicsInfoPhrase = `Your identfied graphics: ${graphicsRenderer}, VENDOR: ${graphicsVendor}.`;
+const graphicsInfoPhrase = `Your identified graphics: ${graphicsRenderer}, VENDOR: ${graphicsVendor}.`;
 // Getting graphic extensions with WEBGL
 function getGraphicalUnitExtensions(gl){
     const unMaskedInfo = {
@@ -108,7 +108,7 @@ nowFetch().then(response => {
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin, deviceWidth: deviceWidth,
         deviceHeight: deviceHeight, weather: response.weather, temperature: response.temperature
     }
-    const ipPhrase = `Your IP adress is ${data.ip}.`;
+    const ipPhrase = `Your IP address is ${data.ip}.`;
     const ispPhrase = `Your network provider is ${data.isp}.`;
     const headersPhrase = `${data.headers}.`;
     const countryPhrase = `You live in ${data.country}.`;
@@ -129,9 +129,10 @@ nowFetch().then(response => {
     bakeCookie(data).then(res => {
         document.cookie = `monstercookie=${res.cookie}`
         console.log(document.cookie)
-        const cookiePhrase = `The cookie I stored to itentify you: ${res.cookie}.`;
+        const cookiePhrase = `The cookie I stored to identify you: ${res.cookie}.`;
         document.querySelector('.cookie').textContent = cookiePhrase;
     })
+})
     const date = Date.now()
     console.log(date)
     const vpnData = {timezone: data.timezone}
