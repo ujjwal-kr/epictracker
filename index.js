@@ -50,7 +50,7 @@ app.get('/', async (req, res) => {
 
 });
 
-app.get('/weather/:city', async (req, res) => {
+app.get('/weather/:city', async (req, res) => { // Because URL PARAMS ARE COOLER
     const city = req.params.city;
     await Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=84f0c05e16abc57b03ca8fa00b59f78e&units=metric`).then(weather => {
         return res.json({
