@@ -58,6 +58,8 @@ if (deviceWidth < 990) {
             }, 1000); 
         })
     }
+} else {
+    document.querySelector('.rotation-rate').textContent = `Open this website on your mobile device to see device motion tracker information`;
 }
 function guessIfTheDeviceIsOnTable(x,y,z) {
     if (x === 0 && y === 0 && z === 0) {
@@ -97,6 +99,16 @@ async function weather(city) {
         method: 'GET'
     })
     return response.json()
+}
+// Visits
+let visitCount = localStorage.getItem("visits")
+if (!visitCount) {
+    document.querySelector('.visits').textContent = `This is your first time on this page`;
+    localStorage.setItem("visits", 1)
+} else {
+    visitCount = parseInt(visitCount) + 1;
+    localStorage.setItem("visits", visitCount)
+    document.querySelector('.visits').textContent = `You have visited this page ${visitCount} times`;
 }
 // PLay with cookies
 nowFetch().then(response => {
