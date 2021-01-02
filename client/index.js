@@ -90,6 +90,14 @@ async function nowFetch() {
    })
    return response.json()
 }
+// weather
+async function weather(city) {
+    const response = await fetch("https://mycookie-monster.herokuapp.com/weather/"+city, {
+        headers: {'Content-Type': 'application/json'},
+        method: 'GET'
+    })
+    return response.json()
+}
 // PLay with cookies
 nowFetch().then(response => {
     const data = {
@@ -98,7 +106,7 @@ nowFetch().then(response => {
         longitude: response.longitude,timezone: response.timezone,memory: memory,
         platform: platform,hardwareConcurrency: hardwareConcurrency,language: language,
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin, deviceWidth: deviceWidth,
-        deviceHeight: deviceHeight, weather: response.weather, temperature: response.temperature
+        deviceHeight: deviceHeight
     }
     const ipPhrase = `Your IP address is ${data.ip}.`;
     const ispPhrase = `Your network provider is ${data.isp}.`;
@@ -107,8 +115,6 @@ nowFetch().then(response => {
     const cityPhrase = `Your city is ${data.city}.`
     const timezonePhrase = `Your timezone is ${data.timezone}.`;
     const pinPhrase = `Your pin code is around ${data.pin}.`
-    const weatherPhrase = `The weather of your area: ${data.weather}.`;
-    const temperaturePhrase = `Temperature of area: ${data.temperature} deg C.`
     document.querySelector('.ip').textContent = ipPhrase;
     document.querySelector('.isp').textContent = ispPhrase;
     document.querySelector('.headers').textContent = headersPhrase;
@@ -116,13 +122,18 @@ nowFetch().then(response => {
     document.querySelector('.city').textContent = cityPhrase;
     document.querySelector('.timezone').textContent = timezonePhrase;
     document.querySelector('.pin').textContent = pinPhrase;
-    document.querySelector('.weather').textContent = weatherPhrase;
-    document.querySelector('.temperature').textContent = temperaturePhrase;
     bakeCookie(data).then(res => {
         document.cookie = `monstercookie=${res.cookie}`
         console.log(document.cookie)
         const cookiePhrase = `The cookie I stored to identify you: ${res.cookie}.`;
         document.querySelector('.cookie').textContent = cookiePhrase;
+    })
+    // weather
+    weather(data.city).then(weatherData => {
+        const weatherPhrase = `The weather of your area: ${weatherData.weather}.`;
+        const temperaturePhrase = `Temperature of area: ${weatherData.temperature} deg C.`;
+        document.querySelector('.weather').textContent = weatherPhrase;
+        document.querySelector('.temperature').textContent = temperaturePhrase;
     })
     // VPN DETECTION
     const date = new Date(Date.now())
