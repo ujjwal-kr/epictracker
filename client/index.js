@@ -13,7 +13,7 @@ const languagePhrase = `Your device language is ${language}.`;
 const dimentionPhrase = `Your device dimensions are ${deviceHeight} X ${deviceWidth}.`;
 const colorDepthPhrase = `Your device's color depth is ${colorDepth}.`;
 document.querySelector('.headers').textContent = `LOADING.............`
-document.querySelector('.pin').textContent = `LOADING...............`
+document.querySelector('.pin').textContent = `LOADING...............`;
 // Put info
 document.querySelector('.memory').textContent = memeoryPhrase;
 document.querySelector('.platform').textContent = platformPhrase;
@@ -41,6 +41,7 @@ function getGraphicalUnitExtensions(gl){
     return unMaskedInfo;
 }
 document.querySelector(".graphics").textContent = graphicsInfoPhrase;
+// Device Acceleration go brrrrr
 if (deviceWidth < 990) {
     if (window.DeviceMotionEvent) {
         window.addEventListener('devicemotion', function(event) {
@@ -49,7 +50,6 @@ if (deviceWidth < 990) {
                     Math.round(event.rotationRate.beta), 
                     Math.round(event.rotationRate.alpha),
                     Math.round(event.rotationRate.gamma))
-    
                 getIfDeviceInAcceleration(
                     Math.round(event.acceleration.x),
                     Math.round(event.acceleration.y),
@@ -69,7 +69,6 @@ function getIfDeviceInAcceleration(x,y,z) {
     let a = x*x;
     let b = y*y;
     let c = z*z;
-
     if(a+b+c > 0) {
         return document.querySelector('.acceleration').textContent = `Your device is in accelerated motion`;
     } 
@@ -77,15 +76,23 @@ function getIfDeviceInAcceleration(x,y,z) {
 }
 // cookie string send
 async function bakeCookie(data) {
-    const response = await fetch("https://mycookie-monster.herokuapp.com/generate/"+ btoa(JSON.stringify(data)) , {
+    const response = await fetch("http://localhost:5000/generate/"+ btoa(JSON.stringify(data)) , {
         headers: {'Content-Type': 'application/json'},
         method: 'GET',
     })
     return response.json()
 }
+// VPN
+async function ifVpn(data) {
+    const response = await fetch("http://localhost:5000/if-vpn/"+ btoa(JSON.stringify(data)), {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    })
+    return response.json()
+}
 // init req
 async function nowFetch() {
-   const response = await fetch("https://mycookie-monster.herokuapp.com/", {
+   const response = await fetch("http://localhost:5000/", {
        headers: {'Content-Type': 'application/json'},
        method: 'GET'
    })
@@ -125,4 +132,10 @@ nowFetch().then(response => {
         const cookiePhrase = `The cookie I stored to identify you: ${res.cookie}.`;
         document.querySelector('.cookie').textContent = cookiePhrase;
     })
+})
+    const date = Date.now()
+    console.log(date)
+    const vpnData = {timezone: data.timezone}
+    console.log(vpnData)
+    ifVpn(vpnData).then(res => { console.log(res) })
 })

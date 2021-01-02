@@ -21,7 +21,8 @@ app.get('/', async (req, res) => {
     const ip = req.headers['x-forwarded-for']
     const agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36';
 
-    const url = "https://api.ip8.com/ip/lookup/"+ip;
+    // const url = "https://api.ip8.com/ip/lookup/"+ip;
+    const url = "https://api.ip8.com/ip/lookup/176.10.112.40";
 
     await Axios.get(url, {
         headers: {
@@ -58,13 +59,34 @@ app.get('/', async (req, res) => {
 });
 
 
-app.get('/generate/:data', async (req, res) => {
+app.get('/generate/:data', async (req, res) => {    // Because URL PARAMS ARE COOLER
     // this can be stored in the Database now
     console.log(atob(req.params.data));
     res.json({cookie: req.params.data})
 })
 
+app.get('/if-vpn/:data', async(req, res) => {
+    const data = JSON.parse(atob(req.params.data))
+    console.log(data)
+    // Timezone Stuff
+    let options = {
+        timeZone: data.timezone,
+        hour: 'numeric',
+        minute: 'numeric',
+        month: 'numeric',
+        second: 'numeric',
+        year: 'numeric',
+        day: 'numeric'
+    },
+    formatter = new Intl.DateTimeFormat([], options);
+    const stringTime = formatter.format(new Date());
+    const IPtime = Date.parse(stringTime)
+    console.log(IPtime)
+    console.log(stringTime)
+    return res.json({message: "yay i work"})
+})
+
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
-    console.log('Example app listening on port ' + port);
+    console.log(`Waiting on port for someone :) ${port}`);
 });
