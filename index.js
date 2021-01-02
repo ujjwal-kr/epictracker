@@ -65,34 +65,6 @@ app.get('/generate/:data', async (req, res) => {    // Because URL PARAMS ARE CO
     res.json({cookie: req.params.data})
 })
 
-app.get('/if-vpn/:data', async(req, res) => {
-    const data = JSON.parse(atob(req.params.data))
-    let options = {
-        timeZone: data.timezone,
-        hour: 'numeric',
-        minute: 'numeric',
-        month: 'numeric',
-        second: 'numeric',
-        year: 'numeric',
-        day: 'numeric'
-    };
-    formatter = new Intl.DateTimeFormat([], options);
-    const stringTime = formatter.format(new Date());
-    const IPtime = Date.parse(stringTime)
-    let dif = IPtime - data.deviceTime;
-    console.log(stringTime)
-    console.log(dif)
-    console.log(IPtime)
-    if (dif < 0) {
-        dif = -1*dif
-        console.log(dif)
-    }
-    if (dif > 20800491) {
-        return res.json({message: 'yay VPN'})
-    }
-    return res.json({message: "no VPN"})
-})
-
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
     console.log(`Waiting on port for someone :) ${port}`);
