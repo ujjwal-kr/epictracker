@@ -130,7 +130,7 @@ nowFetch().then(response => {
     })
     // weather
     weather(data.city).then(weatherData => {
-        const weatherPhrase = `The weather of your area: ${weatherData.weather}.`;
+        const weatherPhrase = `The weather of your area: ${weatherData.description}.`;
         const temperaturePhrase = `Temperature of area: ${weatherData.temperature} deg C.`;
         document.querySelector('.weather').textContent = weatherPhrase;
         document.querySelector('.temperature').textContent = temperaturePhrase;
