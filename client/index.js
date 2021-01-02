@@ -63,7 +63,7 @@ function guessIfTheDeviceIsOnTable(x,y,z) {
     if (x === 0 && y === 0 && z === 0) {
         return document.querySelector('.rotation-rate').textContent = `Your device is on something like a table`;
     } 
-    return document.querySelector('.rotation-rate').textContent = `Your device in your hands`;
+    return document.querySelector('.rotation-rate').textContent = `Your device is in your hands`;
 }
 function getIfDeviceInAcceleration(x,y,z) {
     let a = x*x;
