@@ -75,7 +75,7 @@ app.get('/if-vpn/:data', async(req, res) => {
         second: 'numeric',
         year: 'numeric',
         day: 'numeric'
-    },
+    };
     formatter = new Intl.DateTimeFormat([], options);
     const stringTime = formatter.format(new Date());
     const IPtime = Date.parse(stringTime)
