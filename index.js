@@ -87,7 +87,7 @@ app.get('/if-vpn/:data', async(req, res) => {
         dif = -1*dif
         console.log(dif)
     }
-    if (diff > 20800491) {
+    if (dif > 20800491) {
         return res.json({message: 'yay VPN'})
     }
     return res.json({message: "no VPN"})
