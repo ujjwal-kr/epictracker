@@ -132,7 +132,6 @@ nowFetch().then(response => {
         const cookiePhrase = `The cookie I stored to identify you: ${res.cookie}.`;
         document.querySelector('.cookie').textContent = cookiePhrase;
     })
-})
     const date = Date.now()
     console.log(date)
     const vpnData = {timezone: data.timezone}
