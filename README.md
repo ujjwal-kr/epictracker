@@ -17,7 +17,7 @@ Demo: https://epictracker.now.sh
 - Device Acceleration.
 - Weather information of your area.
 
-## How can stop we stop you from tracking us?
+## How can we stop you from tracking us?
 - Use A VPN [your information wont be visible but probably I will detect if you are using one ;) ]
 - Find ways to disable fingerprinting in your browser, which is tough.
 
