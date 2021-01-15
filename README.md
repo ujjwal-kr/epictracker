@@ -24,11 +24,12 @@ Demo: https://epictracker.now.sh
 - Use A VPN [your information wont be visible but probably I will detect if you are using one ;) ]
 - Find ways to disable fingerprinting in your browser, which is tough.
 
-## How can I stop Google and Facebook from tracking us?
-- *You Can't*
 
 ## Is this illegal ?
-- No, it's not.
+- No.
+
+## How can I stop Google and Facebook from tracking us?
+- *You Can't*
 
 ## Current Arch-
 I use some javascript APIs which is listed in the `client` folder, as [index.js](https://github.com/ujjwal-kr/ip-sniff/blob/main/client/index.js) and sends to to a HEROKU backend, the source is in the `index.js` of the root directory. The server takes in your IP and does a quick IP lookup, also acccepts the cookie and logs in the server.
