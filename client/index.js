@@ -5,6 +5,7 @@ const language = navigator.language;
 const deviceWidth = screen.availWidth;
 const deviceHeight = screen.availHeight;
 const colorDepth = screen.colorDepth;
+
 // Phrases
 const memeoryPhrase = `Your device memory [RAM] is around ${memory} GB.`;
 const platformPhrase = `You are possibly running: ${platform}.`;
@@ -14,6 +15,7 @@ const dimentionPhrase = `Your device dimensions are ${deviceHeight} X ${deviceWi
 const colorDepthPhrase = `Your device's color depth is ${colorDepth}.`;
 document.querySelector('.headers').textContent = `LOADING.............`
 document.querySelector('.pin').textContent = `LOADING...............`;
+
 // Put info
 document.querySelector('.memory').textContent = memeoryPhrase;
 document.querySelector('.platform').textContent = platformPhrase;
@@ -21,12 +23,14 @@ document.querySelector('.con').textContent = hardwareConcurrencyPhrase;
 document.querySelector('.lang').textContent = languagePhrase;
 document.querySelector('.depth').textContent = colorDepthPhrase;
 document.querySelector('.dimentions').textContent = dimentionPhrase;
+
 // Try to get the graphichal processing unit info
 const canv = document.getElementById("canv");
 const gl = canv.getContext("experimental-webgl");
 const graphicsVendor = getGraphicalUnitExtensions(gl).vendor;
 const graphicsRenderer = getGraphicalUnitExtensions(gl).renderer;
 const graphicsInfoPhrase = `Your identified graphics: ${graphicsRenderer}, VENDOR: ${graphicsVendor}.`;
+
 // Getting graphic extensions with WEBGL
 function getGraphicalUnitExtensions(gl){
     const unMaskedInfo = {
@@ -40,6 +44,7 @@ function getGraphicalUnitExtensions(gl){
     }
     return unMaskedInfo;
 }
+
 document.querySelector(".graphics").textContent = graphicsInfoPhrase;
 // Device Acceleration go brrrrr
 if (deviceWidth < 990) {
@@ -61,6 +66,7 @@ if (deviceWidth < 990) {
 } else {
     document.querySelector('.rotation-rate').textContent = `Open this website on your mobile device to see device motion tracker information`;
 }
+
 function guessIfTheDeviceIsOnTable(x,y,z) {
     if (x === 0 && y === 0 && z === 0) {
         document.querySelector('.rotation-rate').textContent = `Your device is on something like a table`;
@@ -68,6 +74,7 @@ function guessIfTheDeviceIsOnTable(x,y,z) {
         document.querySelector('.rotation-rate').textContent = `Your device is in your hands`;
     }
 }
+
 function getIfDeviceInAcceleration(x,y,z) {
     let a = x*x;
     let b = y*y;
@@ -78,6 +85,7 @@ function getIfDeviceInAcceleration(x,y,z) {
         document.querySelector('.acceleration').textContent = `Your device isnt accelerating`;
     }
 }
+
 // cookie string send
 async function bakeCookie(data) {
     const response = await fetch("https://mycookie-monster.herokuapp.com/generate/"+ btoa(JSON.stringify(data)) , {
@@ -86,6 +94,7 @@ async function bakeCookie(data) {
     })
     return response.json()
 }
+
 // init req
 async function nowFetch() {
    const response = await fetch("https://mycookie-monster.herokuapp.com/", {
@@ -94,6 +103,7 @@ async function nowFetch() {
    })
    return response.json()
 }
+
 // weather
 async function weather(city) {
     const response = await fetch("https://mycookie-monster.herokuapp.com/weather/"+city, {
@@ -102,6 +112,7 @@ async function weather(city) {
     })
     return response.json()
 }
+
 // Visits
 let visitCount = localStorage.getItem("visits")
 if (!visitCount) {
@@ -112,6 +123,7 @@ if (!visitCount) {
     localStorage.setItem("visits", visitCount)
     document.querySelector('.visits').textContent = `You have visited this page ${visitCount} times`;
 }
+
 // PLay with cookies
 nowFetch().then(response => {
     const data = {
@@ -122,12 +134,14 @@ nowFetch().then(response => {
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin, deviceWidth: deviceWidth,
         deviceHeight: deviceHeight
     }
+
     const dynamicData = {
         headers: data.headers, city: data.city, timezone: data.timezone,
         memory: data.memory, platform: data.platform, hardwareConcurrency: data.hardwareConcurrency,
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, deviceWidth: deviceWidth, 
         deviceHeight: deviceHeight, language: language, colorDepth: colorDepth, isp: data.isp
     }
+
     const encodedDinamic = btoa(JSON.stringify(dynamicData))
     const HASH = sha1(encodedDinamic)
     console.log("HASH:" + HASH)
@@ -139,6 +153,7 @@ nowFetch().then(response => {
     const cityPhrase = `Your city is ${data.city}.`
     const timezonePhrase = `Your timezone is ${data.timezone}.`;
     const pinPhrase = `Your pin code is around ${data.pin}.`
+
     document.querySelector('.ip').textContent = ipPhrase;
     document.querySelector('.isp').textContent = ispPhrase;
     document.querySelector('.headers').textContent = headersPhrase;
@@ -147,6 +162,7 @@ nowFetch().then(response => {
     document.querySelector('.timezone').textContent = timezonePhrase;
     document.querySelector('.pin').textContent = pinPhrase;
     document.querySelector('.hash').textContent = hashPhrase;
+
     // weather
     weather(data.city).then(weatherData => {
         const weatherPhrase = `The weather of your area: ${weatherData.description}.`;
@@ -154,6 +170,7 @@ nowFetch().then(response => {
         document.querySelector('.weather').textContent = weatherPhrase;
         document.querySelector('.temperature').textContent = temperaturePhrase;
     })
+    
     // VPN DETECTION
     if (deviceWidth > 990) {
         const date = new Date(Date.now())
