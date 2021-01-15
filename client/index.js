@@ -63,18 +63,20 @@ if (deviceWidth < 990) {
 }
 function guessIfTheDeviceIsOnTable(x,y,z) {
     if (x === 0 && y === 0 && z === 0) {
-        return document.querySelector('.rotation-rate').textContent = `Your device is on something like a table`;
-    } 
-    return document.querySelector('.rotation-rate').textContent = `Your device is in your hands`;
+        document.querySelector('.rotation-rate').textContent = `Your device is on something like a table`;
+    } else {
+        document.querySelector('.rotation-rate').textContent = `Your device is in your hands`;
+    }
 }
 function getIfDeviceInAcceleration(x,y,z) {
     let a = x*x;
     let b = y*y;
     let c = z*z;
     if(a+b+c > 0) {
-        return document.querySelector('.acceleration').textContent = `Your device is in accelerated motion`;
-    } 
-    document.querySelector('.acceleration').textContent = `Your device isnt accelerating`;
+        document.querySelector('.acceleration').textContent = `Your device is in accelerated motion`;
+    } else {
+        document.querySelector('.acceleration').textContent = `Your device isnt accelerating`;
+    }
 }
 // cookie string send
 async function bakeCookie(data) {
