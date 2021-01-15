@@ -6,7 +6,7 @@ Demo: https://epictracker.now.sh
 - I may create dummy marketing services to demonstrate the (targeted ads) tracking process close to the realworld.
 
 ## Attention
-**I'm not collecting any of the information. The only string collected is the SHA-1 hash which can NOT be reversed to get the actual data. <del>So stop asking me if now I know your mom's name </del>**
+**I'm not collecting any of the information. The only string collected is the SHA-1 hash which can NOT be reversed to get the actual data. <del>So stop asking me if now I know your mom's name. </del>**
 
 ## What Information is used ?
 - Your operating system information.
