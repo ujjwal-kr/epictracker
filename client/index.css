@@ -25,6 +25,14 @@ body {
     font-size: 1.2em;
 }
 
+.hash {
+    background: gray;
+    width: auto;
+    font-size: 1.34rem;
+    border-radius:5px;
+    padding: 10px;
+}
+
 p {
     word-break: break-all;
 }
