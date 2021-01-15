@@ -137,14 +137,14 @@ nowFetch().then(response => {
         longitude: response.longitude,timezone: response.timezone,memory: memory,
         platform: platform,hardwareConcurrency: hardwareConcurrency,language: language,
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin, deviceWidth: deviceWidth,
-        deviceHeight: deviceHeight
+        deviceHeight: deviceHeight, touchPoints: touchPoints
     }
 
     const dynamicData = {
         headers: data.headers, city: data.city, timezone: data.timezone,
         memory: data.memory, platform: data.platform, hardwareConcurrency: data.hardwareConcurrency,
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, deviceWidth: deviceWidth, 
-        deviceHeight: deviceHeight, language: language, colorDepth: colorDepth, isp: data.isp
+        deviceHeight: deviceHeight, language: language, colorDepth: colorDepth, isp: data.isp, touchPoints: touchPoints
     }
 
     const encodedDynamic = btoa(JSON.stringify(dynamicData))
