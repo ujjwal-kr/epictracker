@@ -121,14 +121,15 @@ nowFetch().then(response => {
         deviceHeight: deviceHeight
     }
     const dynamicData = {
-        headers: data.headers, city: data.city, country: data.country, timezone: data.timezone,
+        headers: data.headers, city: data.city, timezone: data.timezone,
         memory: data.memory, platform: data.platform, hardwareConcurrency: data.hardwareConcurrency,
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, deviceWidth: deviceWidth, 
-        deviceHeight: deviceHeight, language: language, colorDepth: colorDepth
+        deviceHeight: deviceHeight, language: language, colorDepth: colorDepth, isp: data.isp
     }
     const encodedDinamic = btoa(JSON.stringify(dynamicData))
-    console.log(encodedDinamic)
-    console.log("HASH:" + sha1(encodedDinamic))
+    const HASH = sha1(encodedDinamic)
+    console.log("HASH:" + HASH)
+    const hashPhrase = `Your identity HASH: ${HASH}`
     const ipPhrase = `Your IP address is ${data.ip}.`;
     const ispPhrase = `Your network provider is ${data.isp}.`;
     const headersPhrase = `${data.headers}.`;
@@ -143,6 +144,7 @@ nowFetch().then(response => {
     document.querySelector('.city').textContent = cityPhrase;
     document.querySelector('.timezone').textContent = timezonePhrase;
     document.querySelector('.pin').textContent = pinPhrase;
+    document.querySelector('.hash').textContent = hashPhrase;
     // weather
     weather(data.city).then(weatherData => {
         const weatherPhrase = `The weather of your area: ${weatherData.description}.`;
