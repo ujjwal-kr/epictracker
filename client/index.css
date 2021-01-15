@@ -26,7 +26,7 @@ body {
 }
 
 .hash {
-    background: gray;
+    background: rgb(104, 104, 104);
     width: auto;
     font-size: 1.34rem;
     border-radius:5px;
