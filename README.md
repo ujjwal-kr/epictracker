@@ -32,7 +32,7 @@ Demo: https://epictracker.now.sh
 - *You Can't*
 
 ## Current Arch-
-I use some javascript APIs which is listed in the `client` folder, as [index.js](https://github.com/ujjwal-kr/ip-sniff/blob/main/client/index.js) and sends to to a HEROKU backend, the source is in the `index.js` of the root directory. The server takes in your IP and does a quick IP lookup, also acccepts the cookie and logs in the server.
+I use some javascript APIs which is listed in the `client` folder, as [index.js](https://github.com/ujjwal-kr/ip-sniff/blob/main/client/index.js) and sends to to a HEROKU backend, the source is in the `index.js` of the root directory. The server takes in your IP and does a quick IP lookup, weather lookup, and SHA indentification.
 
 ### Todos
 - Try to detect VPN connections from another country. -- *DONE*
