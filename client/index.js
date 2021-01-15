@@ -5,9 +5,13 @@ const language = navigator.language;
 const deviceWidth = screen.availWidth;
 const deviceHeight = screen.availHeight;
 const colorDepth = screen.colorDepth;
-
+let touchPoints = navigator.maxTouchPoints;
+let touchSupport;
 // Phrases
 const memeoryPhrase = `Your device memory [RAM] is around ${memory} GB.`;
+if (touchPoints > 1) {touchSupport = true}
+else {touchSupport = false}
+const touchPhrase = `Touch screen support: ${touchSupport}`
 const platformPhrase = `You are possibly running: ${platform}.`;
 const hardwareConcurrencyPhrase = `You have ${hardwareConcurrency} logical processor cores running.`;
 const languagePhrase = `Your device language is ${language}.`;
@@ -23,6 +27,7 @@ document.querySelector('.con').textContent = hardwareConcurrencyPhrase;
 document.querySelector('.lang').textContent = languagePhrase;
 document.querySelector('.depth').textContent = colorDepthPhrase;
 document.querySelector('.dimentions').textContent = dimentionPhrase;
+document.querySelector('.touch').textContent = touchPhrase
 
 // Try to get the graphichal processing unit info
 const canv = document.getElementById("canv");
@@ -142,8 +147,8 @@ nowFetch().then(response => {
         deviceHeight: deviceHeight, language: language, colorDepth: colorDepth, isp: data.isp
     }
 
-    const encodedDinamic = btoa(JSON.stringify(dynamicData))
-    const HASH = sha1(encodedDinamic)
+    const encodedDynamic = btoa(JSON.stringify(dynamicData))
+    const HASH = sha1(encodedDynamic)
     console.log("HASH:" + HASH)
     const hashPhrase = `Your identity HASH: ${HASH}`
     const ipPhrase = `Your IP address is ${data.ip}.`;
