@@ -120,14 +120,15 @@ nowFetch().then(response => {
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin, deviceWidth: deviceWidth,
         deviceHeight: deviceHeight
     }
-    const staticData = {
+    const dynamicData = {
         headers: data.headers, city: data.city, country: data.country, timezone: data.timezone,
         memory: data.memory, platform: data.platform, hardwareConcurrency: data.hardwareConcurrency,
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, deviceWidth: deviceWidth, 
         deviceHeight: deviceHeight, language: language, colorDepth: colorDepth
     }
-    const encodedStatic = btoa(JSON.stringify(staticData))
-    console.log(encodedStatic)
+    const encodedDinamic = btoa(JSON.stringify(dynamicData))
+    console.log(encodedDinamic)
+    console.log("HASH:" + sha1(encodedDinamic))
     const ipPhrase = `Your IP address is ${data.ip}.`;
     const ispPhrase = `Your network provider is ${data.isp}.`;
     const headersPhrase = `${data.headers}.`;
@@ -142,12 +143,6 @@ nowFetch().then(response => {
     document.querySelector('.city').textContent = cityPhrase;
     document.querySelector('.timezone').textContent = timezonePhrase;
     document.querySelector('.pin').textContent = pinPhrase;
-    bakeCookie(data).then(res => {
-        document.cookie = `monstercookie=${res.cookie}`
-        // console.log(document.cookie)
-        const cookiePhrase = `The cookie I stored to identify you: ${res.cookie}.`;
-        document.querySelector('.cookie').textContent = cookiePhrase;
-    })
     // weather
     weather(data.city).then(weatherData => {
         const weatherPhrase = `The weather of your area: ${weatherData.description}.`;
