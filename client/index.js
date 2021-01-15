@@ -120,6 +120,14 @@ nowFetch().then(response => {
         graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin, deviceWidth: deviceWidth,
         deviceHeight: deviceHeight
     }
+    const staticData = {
+        headers: data.headers, city: data.city, country: data.country, timezone: data.timezone,
+        memory: data.memory, platform: data.platform, hardwareConcurrency: data.hardwareConcurrency,
+        graphics: graphicsRenderer, graphicsVendor: graphicsVendor, deviceWidth: deviceWidth, 
+        deviceHeight: deviceHeight, language: language, colorDepth: colorDepth
+    }
+    const encodedStatic = btoa(JSON.stringify(staticData))
+    console.log(encodedStatic)
     const ipPhrase = `Your IP address is ${data.ip}.`;
     const ispPhrase = `Your network provider is ${data.isp}.`;
     const headersPhrase = `${data.headers}.`;
@@ -136,7 +144,7 @@ nowFetch().then(response => {
     document.querySelector('.pin').textContent = pinPhrase;
     bakeCookie(data).then(res => {
         document.cookie = `monstercookie=${res.cookie}`
-        console.log(document.cookie)
+        // console.log(document.cookie)
         const cookiePhrase = `The cookie I stored to identify you: ${res.cookie}.`;
         document.querySelector('.cookie').textContent = cookiePhrase;
     })
