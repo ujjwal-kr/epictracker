@@ -17,7 +17,7 @@ const hardwareConcurrencyPhrase = `You have ${hardwareConcurrency} logical proce
 const languagePhrase = `Your device language is ${language}.`;
 const dimentionPhrase = `Your device dimensions are ${deviceHeight} X ${deviceWidth}.`;
 const colorDepthPhrase = `Your device's color depth is ${colorDepth}.`;
-document.querySelector('.headers').textContent = `LOADING.............`
+document.querySelector('.headers').textContent = `LOADING.............`;
 document.querySelector('.pin').textContent = `LOADING...............`;
 
 // Put info
@@ -100,6 +100,15 @@ async function bakeCookie(data) {
     return response.json()
 }
 
+// Add SHA
+async function addSHA(sha) {
+    const response = await fetch("https://mycookie-monster.herokuapp.com/add-sha/"+sha, {
+        headers: {'Content-Type': 'application/json'},
+        method: 'GET'
+    })
+    return response.json()
+}
+
 // init req
 async function nowFetch() {
    const response = await fetch("https://mycookie-monster.herokuapp.com/", {
@@ -149,6 +158,9 @@ nowFetch().then(response => {
 
     const encodedDynamic = btoa(JSON.stringify(dynamicData))
     const HASH = sha1(encodedDynamic)
+    addSHA(HASH).then(shaRESPONSE => {
+        console.log(shaRESPONSE)
+    })
     console.log("HASH:" + HASH)
     const hashPhrase = `Your identity HASH: ${HASH}`
     const ipPhrase = `Your IP address is ${data.ip}.`;

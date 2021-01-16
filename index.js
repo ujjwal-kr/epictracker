@@ -2,6 +2,7 @@ const express = require('express');
 var cors = require('cors');
 var app = express();
 const atob = require('atob');
+const KEY = require('./key');e
 
 app.use(cors())
 
@@ -72,6 +73,11 @@ app.get('/generate/:data', async (req, res) => { // Because URL PARAMS ARE COOLE
     res.json({
         cookie: req.params.data
     })
+})
+
+app.get('/add-sha/:sha', async (req, res) => {
+    console.log(req.params.sha)
+    res.json({ "message": "Created" })
 })
 
 const port = process.env.PORT || 4000;
