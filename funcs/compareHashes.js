@@ -1,10 +1,13 @@
 const compareHashes = {
     compareName: function(sha, response) {
+        let present = false
         response.map(res => {
             if (res.name === sha) {
-                return true
+                present = true
             }
         })
-        return false
+        return present
     }
 }
+
+module.exports = compareHashes;

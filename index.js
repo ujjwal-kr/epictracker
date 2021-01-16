@@ -4,6 +4,7 @@ var app = express();
 const atob = require('atob');
 const KEY = require('./key');
 const Base64 = require('base-64');
+const compareHash = require('./funcs/compareHashes')
 
 app.use(cors())
 
@@ -81,7 +82,11 @@ app.get('/add-sha/:sha', (req, res) => {
     Axios.get("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/", {
         headers: {'Authorization': "token " + KEY}
     }).then(getRes => {
-        console.log(getRes.data)
+        if (compareHash.compareName(req.params.sha, getRes.data) === true) {
+            console.log("yes")
+        } else {
+            console.log("no")
+        }
         return res.json({message: "done"})
         // Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/"+req.params.sha, {
         //     message: "Added a document",
