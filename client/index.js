@@ -102,7 +102,7 @@ async function bakeCookie(data) {
 
 // Add SHA
 async function addSHA(sha) {
-    const response = await fetch("https://mycookie-monster.herokuapp.com/add-sha/"+sha, {
+    const response = await fetch("http://localhost:4000/add-sha/"+sha, {
         headers: {'Content-Type': 'application/json'},
         method: 'GET'
     })

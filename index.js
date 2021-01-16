@@ -2,7 +2,8 @@ const express = require('express');
 var cors = require('cors');
 var app = express();
 const atob = require('atob');
-const KEY = require('./key');e
+const KEY = require('./key');
+const Base64 = require('base-64');
 
 app.use(cors())
 
@@ -75,9 +76,19 @@ app.get('/generate/:data', async (req, res) => { // Because URL PARAMS ARE COOLE
     })
 })
 
-app.get('/add-sha/:sha', async (req, res) => {
-    console.log(req.params.sha)
-    res.json({ "message": "Created" })
+app.get('/add-sha/:sha', (req, res) => {
+    const encoded = Base64.encode(req.params.sha)
+    Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/"+req.params.sha, {
+        message: "Added a document",
+        content: encoded
+    }, {
+        headers: {'Authorization': "token " + KEY}
+    }).then(res => {
+        console.log(res.data)
+    }).catch(e => {
+        console.log(e)
+    })
+    return res.json({message: "Created"})
 })
 
 const port = process.env.PORT || 4000;
