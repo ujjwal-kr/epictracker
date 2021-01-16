@@ -109,6 +109,15 @@ async function addSHA(sha) {
     return response.json()
 }
 
+//Find Count
+async function findCount(sha) {
+    const response = await fetch("http://localhost:4000/get-count/"+sha, {
+        headers: {'Content-Type': 'application/json'},
+        method: 'GET'
+    })
+    return response.json()
+}
+
 // init req
 async function nowFetch() {
    const response = await fetch("https://mycookie-monster.herokuapp.com/", {
@@ -160,6 +169,9 @@ nowFetch().then(response => {
     const HASH = sha1(encodedDynamic)
     addSHA(HASH).then(shaRESPONSE => {
         console.log(shaRESPONSE)
+        findCount(HASH).then(countRes => {
+            console.log(countRes)
+        })
     })
     console.log("HASH:" + HASH)
     const hashPhrase = `Your identity HASH: ${HASH}`

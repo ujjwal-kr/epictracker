@@ -77,9 +77,9 @@ app.get('/generate/:data', async (req, res) => { // Because URL PARAMS ARE COOLE
     })
 })
 
-app.get('/add-sha/:sha', (req, res) => {
+app.get('/add-sha/:sha', async (req, res) => {
     const encoded = Base64.encode(1);
-    Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
+    await Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
         message: "Added a document",
         content: encoded
     }, {
@@ -88,6 +88,17 @@ app.get('/add-sha/:sha', (req, res) => {
         return res.json({ message: "created" })
     }).catch(e => {
         return res.json({ message: "exists" })
+    })
+})
+
+app.get("/get-count/:sha", async (req, res) => {
+    const sha = req.params.sha;
+    await Axios.get("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/"+sha, {
+        headers: {'Authorization': "token "+KEY}
+    }).then(res => {
+        console.log(res)
+    }).catch(e => {
+        res.json({message: "ERRRR"})
     })
 })
 
