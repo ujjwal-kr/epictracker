@@ -98,23 +98,11 @@ app.get('/add-sha/:sha', (req, res) => {
               sha: contentSHA,
               content: newVisit
           }, {headers: { 'Authorization': "token " + KEY } }).then(done => {
-              console.log(done.data)
               res.json({ visits: Base64.decode(newVisit) })
             })
           .catch(e => console.log(e))
         })
         .catch(e => {console.log(e)})
-    })
-})
-
-app.get("/get-count/:sha", async (req, res) => {
-    const sha = req.params.sha
-    await Axios.get("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/"+sha, {
-        headers: {'Authorization': "token "+KEY}
-    }).then(res => {
-        console.log(Base64.decode(res.data.content))
-    }).catch(e => {
-        res.status(400).json({message: "ERRRR"})
     })
 })
 
