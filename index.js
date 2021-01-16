@@ -78,28 +78,16 @@ app.get('/generate/:data', async (req, res) => { // Because URL PARAMS ARE COOLE
 })
 
 app.get('/add-sha/:sha', (req, res) => {
-    const encoded = Base64.encode(req.params.sha);
-    Axios.get("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/", {
-        headers: {'Authorization': "token " + KEY}
-    }).then(getRes => {
-        if (compareHash.compareName(req.params.sha, getRes.data) === true) {
-            console.log("yes")
-        } else {
-            console.log("no")
-        }
-        return res.json({message: "done"})
-        // Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/"+req.params.sha, {
-        //     message: "Added a document",
-        //     content: encoded
-        // }, {
-        //     headers: {'Authorization': "token " + KEY}
-        // }).then(res => {
-        //     console.log(res.data)
-        // }).catch(e => {
-        //     console.log(e)
-        // })
+    const encoded = Base64.encode(1);
+    Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
+        message: "Added a document",
+        content: encoded
+    }, {
+        headers: { 'Authorization': "token " + KEY }
+    }).then(res => {
+        return res.json({ message: "created" })
     }).catch(e => {
-        console.log(e)
+        return res.json({ message: "exists" })
     })
 })
 
