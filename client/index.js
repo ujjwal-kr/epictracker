@@ -133,7 +133,7 @@ async function weather(city) {
         headers: {'Content-Type': 'application/json'},
         method: 'GET'
     })
-    return response.json()
+    return response
 }
 
 // Visits
@@ -171,8 +171,13 @@ nowFetch().then(response => {
         console.log(shaRESPONSE)
         findCount(HASH).then(countRes => {
             console.log(countRes)
+        }).catch(e => {
+            console.log(e)
         })
+    }).catch(e => {
+        console.log(e)
     })
+
     console.log("HASH:" + HASH)
     const hashPhrase = `Your identity HASH: ${HASH}`
     const ipPhrase = `Your IP address is ${data.ip}.`;

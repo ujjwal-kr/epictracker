@@ -77,28 +77,44 @@ app.get('/generate/:data', async (req, res) => { // Because URL PARAMS ARE COOLE
     })
 })
 
-app.get('/add-sha/:sha', async (req, res) => {
-    const encoded = Base64.encode(1);
-    await Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
+app.get('/add-sha/:sha', (req, res) => {
+    const encoded = Base64.encode(1)
+    Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
         message: "Added a document",
         content: encoded
     }, {
         headers: { 'Authorization': "token " + KEY }
-    }).then(res => {
-        return res.json({ message: "created" })
+    }).then(result => {
+        res.json({ message: "created" })
     }).catch(e => {
-        return res.json({ message: "exists" })
+        Axios.get("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
+            headers: { 'Authorization': "token " + KEY }
+        }).then(result => {
+          const contentSHA = result.data.sha;
+          let visits = Base64.decode(result.data.content)
+          let newVisit = Base64.encode(parseInt(visits) + 1)
+          Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/"+ req.params.sha, {
+              message: "UPDATED COUNT",
+              sha: contentSHA,
+              content: newVisit
+          }, {headers: { 'Authorization': "token " + KEY } }).then(done => {
+              console.log(done.data)
+              res.json({ visits: Base64.decode(newVisit) })
+            })
+          .catch(e => console.log(e))
+        })
+        .catch(e => {console.log(e)})
     })
 })
 
 app.get("/get-count/:sha", async (req, res) => {
-    const sha = req.params.sha;
+    const sha = req.params.sha
     await Axios.get("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/"+sha, {
         headers: {'Authorization': "token "+KEY}
     }).then(res => {
-        console.log(res)
+        console.log(Base64.decode(res.data.content))
     }).catch(e => {
-        res.json({message: "ERRRR"})
+        res.status(400).json({message: "ERRRR"})
     })
 })
 
