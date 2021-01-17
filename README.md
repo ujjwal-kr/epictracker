@@ -1,4 +1,4 @@
-# EpicTracker [ip-sniff]
+# `EpicTracker`
 Demo: https://epictracker.now.sh
 - It is a demontstration project of how can I track you using fingerprinting and some automated lookups and stuff.
 - It uses modern Javascript APIs to intentify your metadata and generates an SHA-1 hash based on it. The hash can be used to further identify the browser even after clearing the cache or using the demo in private browsing mode.
