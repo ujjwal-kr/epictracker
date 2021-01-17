@@ -2,9 +2,9 @@ const express = require('express');
 var cors = require('cors');
 var app = express();
 const atob = require('atob');
-const KEY = require('./key');
+// const KEY = require('./key');
 const Base64 = require('base-64');
-
+const KEY = process.env.GITHUB_TOKEN
 app.use(cors())
 
 
