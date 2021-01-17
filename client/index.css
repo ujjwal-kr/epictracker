@@ -11,6 +11,10 @@ body {
     padding: 1.6%;
 }
 
+.visits {
+    color: rgb(121, 251, 15);
+}
+
 .nav {
     padding: 2%;
     background: #00a7a1;
