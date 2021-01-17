@@ -67,15 +67,6 @@ app.get('/weather/:city', async (req, res) => { // Because URL PARAMS ARE COOLER
     })
 })
 
-
-app.get('/generate/:data', async (req, res) => { // Because URL PARAMS ARE COOLER
-    // this can be stored in the Database now
-    console.log(atob(req.params.data));
-    res.json({
-        cookie: req.params.data
-    })
-})
-
 app.get('/add-sha/:sha', (req, res) => {
     const encoded = Base64.encode(1)
     Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
