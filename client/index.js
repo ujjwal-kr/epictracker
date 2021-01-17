@@ -124,7 +124,7 @@ async function weather(city) {
         headers: {'Content-Type': 'application/json'},
         method: 'GET'
     })
-    return response
+    return response.json()
 }
 
 // PLay with cookies
