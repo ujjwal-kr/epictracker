@@ -127,17 +127,6 @@ async function weather(city) {
     return response
 }
 
-// Visits
-let visitCount = localStorage.getItem("visits")
-if (!visitCount) {
-    document.querySelector('.visits').textContent = `This is your first time on this page`;
-    localStorage.setItem("visits", 1)
-} else {
-    visitCount = parseInt(visitCount) + 1;
-    localStorage.setItem("visits", visitCount)
-    document.querySelector('.visits').textContent = `You have visited this page ${visitCount} times`;
-}
-
 // PLay with cookies
 nowFetch().then(response => {
     const data = {
@@ -158,8 +147,11 @@ nowFetch().then(response => {
 
     const encodedDynamic = btoa(JSON.stringify(dynamicData))
     const HASH = sha1(encodedDynamic)
+    document.querySelector('.visits').textContent = `LOADING.......`
     addSHA(HASH).then(shaRESPONSE => {
-        console.log(shaRESPONSE)
+        const visits = shaRESPONSE.visits
+        document.querySelector('.visits').textContent = `According to the unique hash, you have visited the site ${visits} time(s).`
+        console.log(visits)
     }).catch(e => {
         console.log(e)
     })

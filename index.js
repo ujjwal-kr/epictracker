@@ -4,7 +4,6 @@ var app = express();
 const atob = require('atob');
 const KEY = require('./key');
 const Base64 = require('base-64');
-const compareHash = require('./funcs/compareHashes')
 
 app.use(cors())
 
@@ -85,7 +84,7 @@ app.get('/add-sha/:sha', (req, res) => {
     }, {
         headers: { 'Authorization': "token " + KEY }
     }).then(result => {
-        res.json({ message: "created" })
+        res.json({ visits: 1 })
     }).catch(e => {
         Axios.get("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
             headers: { 'Authorization': "token " + KEY }
