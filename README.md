@@ -36,5 +36,5 @@ I use some javascript APIs which is listed in the `client` folder, as [index.js]
 ### Todos
 - Try to detect VPN connections from another country. -- *DONE*
 - Tell user how many time they visited the page. (cookie mode). -- *BORING*
-- Tell user how many times they visited the page. (magic mode). -- *IN PROGRESS*
+- Tell user how many times they visited the page. (magic mode). -- *DONE*
 - Add some styles.  -- *LOL, NO*
