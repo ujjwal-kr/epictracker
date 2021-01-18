@@ -127,7 +127,6 @@ async function weather(city) {
     return response.json()
 }
 
-// PLay with cookies
 nowFetch().then(response => {
     const data = {
         headers: response.headers, ip: response.ip,isp: response.isp,
