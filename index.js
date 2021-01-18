@@ -4,8 +4,7 @@ var app = express();
 const atob = require('atob');
 // const KEY = require('./key');
 const Base64 = require('base-64');
-const KEY = process.env.GITHUB_TOKEN;
-const cheerio = require('cheerio');
+const KEY = process.env.GITHUB_TOKEN
 app.use(cors())
 
 
@@ -24,15 +23,14 @@ app.get('/', async (req, res) => {
     const ip = req.headers['x-forwarded-for']
     const agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36';
 
-    const url = "https://community.spiceworks.com/tools/ip-lookup/results?hostname=223.238.102.248";
+    const url = "https://api.ip8.com/ip/lookup/" + ip;
+    // const url = "https://api.ip8.com/ip/lookup/176.10.112.40";
 
     await Axios.get(url, {
         headers: {
             'user-agent': agent,
-            'accept': 'text/html'
         }
     }).then(async result => {
-        console.log(result)
         const data = {
             headers: req.headers['user-agent'],
             ip,
@@ -47,7 +45,7 @@ app.get('/', async (req, res) => {
             longitude: result.data.details.geoip[0].city.details.longitude,
         }
 
-        return res.status(200).json({message: "11"})
+        return res.status(200).json(data)
     }).catch(e => {
         console.log("Something Went Wrong, wonderfully handled exception", e)
     })
