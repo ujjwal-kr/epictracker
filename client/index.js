@@ -91,11 +91,18 @@ function getIfDeviceInAcceleration(x,y,z) {
     }
 }
 
-// cookie string send
-async function bakeCookie(data) {
-    const response = await fetch("https://mycookie-monster.herokuapp.com/generate/"+ btoa(JSON.stringify(data)) , {
+async function collectHASH(sha) {
+    const response = await fetch("https://mycookie-monster.herokuapp.com/collect-sha/"+sha, {
         headers: {'Content-Type': 'application/json'},
         method: 'GET',
+    })
+    return response.json()
+}
+
+async function scan() {
+    const response = await fetch("https://mycookie-monster.herokuapp.com/scan", {
+        headers: {'Content-Type': 'application/json'},
+        method: 'GET'
     })
     return response.json()
 }

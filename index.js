@@ -117,8 +117,8 @@ app.get('/collect-sha/:sha', async (req, res) => {
     }
 })
 
-app.get('/scan/:ip', async (req, res) => {
-    const ip = req.params.ip
+app.get('/scan', async (req, res) => {
+    const ip = req.headers['x-forwarded-for']
     const items = await Item.findAll({
         where: {ip: ip}
     })
