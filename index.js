@@ -109,33 +109,8 @@ app.get('/add-sha/:sha', (req, res) => {
 app.get('/collect-sha/:sha', (req, res) => {
     // const ip = req.headers['x-forwarded-for']
     const ip = "176.10.112.40";
-    Item.create({ sha: req.params.sha, ip: ip })
-    const encoded = Base64.encode(1)
-    Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
-        message: "Added a document",
-        content: encoded
-    }, {
-        headers: { 'Authorization': "token " + KEY }
-    }).then(result => {
-        res.json({ visits: 1 })
-    }).catch(e => {
-        Axios.get("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
-            headers: { 'Authorization': "token " + KEY }
-        }).then(result => {
-            const contentSHA = result.data.sha;
-            let visits = Base64.decode(result.data.content)
-            let newVisit = Base64.encode(parseInt(visits) + 1)
-            Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
-                message: "UPDATED COUNT",
-                sha: contentSHA,
-                content: newVisit
-            }, { headers: { 'Authorization': "token " + KEY } }).then(done => {
-                res.json({ visits: Base64.decode(newVisit) })
-            })
-                .catch(e => console.log(e))
-        })
-            .catch(e => { console.log(e) })
-    })
+    const item = await Item.create({ sha: req.params.sha, ip: ip })
+    return res.json({item})
 })
 
 app.get('/scan/:ip', async (req, res) => {
@@ -143,7 +118,6 @@ app.get('/scan/:ip', async (req, res) => {
     const items = await Item.findAll({
         where: {ip: ip}
     })
-    console.log(JSON.stringify(items, null, 2))
     return res.json({items})
 })
 
