@@ -2,18 +2,21 @@ const express = require('express');
 var cors = require('cors');
 var app = express();
 const atob = require('atob');
-// const KEY = require('./key');
+const KEY = require('./key');
 const Base64 = require('base-64');
-const { Sequelize } = require('sequelize');
-const KEY = process.env.GITHUB_TOKEN
+const { Sequelize, DataTypes } = require('sequelize');
+// const KEY = process.env.GITHUB_TOKEN
 app.use(cors())
 
 const sequelize = new Sequelize('sqlite::memory:', {
     dialect: 'sqlite',
-    storage: 'test.sqlite'
+    storage: 'db.sqlite'
 })
 
-
+const Item = sequelize.define("Item", {
+    sha: { type: DataTypes.STRING, allowNull: false },
+    ip: { type: DataTypes.STRING, allowNull: false }
+})
 
 const {
     default: Axios
@@ -103,12 +106,46 @@ app.get('/add-sha/:sha', (req, res) => {
     })
 })
 
+app.get('/collect-sha/:sha', (req, res) => {
+    // const ip = req.headers['x-forwarded-for']
+    const ip = "176.10.112.40";
+    Item.create({ sha: req.params.sha, ip: ip })
+    const encoded = Base64.encode(1)
+    Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
+        message: "Added a document",
+        content: encoded
+    }, {
+        headers: { 'Authorization': "token " + KEY }
+    }).then(result => {
+        res.json({ visits: 1 })
+    }).catch(e => {
+        Axios.get("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
+            headers: { 'Authorization': "token " + KEY }
+        }).then(result => {
+            const contentSHA = result.data.sha;
+            let visits = Base64.decode(result.data.content)
+            let newVisit = Base64.encode(parseInt(visits) + 1)
+            Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
+                message: "UPDATED COUNT",
+                sha: contentSHA,
+                content: newVisit
+            }, { headers: { 'Authorization': "token " + KEY } }).then(done => {
+                res.json({ visits: Base64.decode(newVisit) })
+            })
+                .catch(e => console.log(e))
+        })
+            .catch(e => { console.log(e) })
+    })
+})
+
 const port = process.env.PORT || 4000;
 app.listen(port, async () => {
     console.log(`Waiting on port for someone :) ${port}`);
     try {
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
+        await Item.sync()
+        console.log("Item Table Init")
     } catch (error) {
         console.error('Unable to connect to the database:', error);
     }
