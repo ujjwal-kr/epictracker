@@ -4,8 +4,15 @@ var app = express();
 const atob = require('atob');
 // const KEY = require('./key');
 const Base64 = require('base-64');
+const { Sequelize } = require('sequelize');
 const KEY = process.env.GITHUB_TOKEN
 app.use(cors())
+
+const sequelize = new Sequelize('sqlite::memory:', {
+    dialect: 'sqlite',
+    storage: 'test.sqlite'
+})
+
 
 
 const {
@@ -80,23 +87,29 @@ app.get('/add-sha/:sha', (req, res) => {
         Axios.get("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
             headers: { 'Authorization': "token " + KEY }
         }).then(result => {
-          const contentSHA = result.data.sha;
-          let visits = Base64.decode(result.data.content)
-          let newVisit = Base64.encode(parseInt(visits) + 1)
-          Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/"+ req.params.sha, {
-              message: "UPDATED COUNT",
-              sha: contentSHA,
-              content: newVisit
-          }, {headers: { 'Authorization': "token " + KEY } }).then(done => {
-              res.json({ visits: Base64.decode(newVisit) })
+            const contentSHA = result.data.sha;
+            let visits = Base64.decode(result.data.content)
+            let newVisit = Base64.encode(parseInt(visits) + 1)
+            Axios.put("https://api.github.com/repos/ujjwal-kr-data/ip-data/contents/" + req.params.sha, {
+                message: "UPDATED COUNT",
+                sha: contentSHA,
+                content: newVisit
+            }, { headers: { 'Authorization': "token " + KEY } }).then(done => {
+                res.json({ visits: Base64.decode(newVisit) })
             })
-          .catch(e => console.log(e))
+                .catch(e => console.log(e))
         })
-        .catch(e => {console.log(e)})
+            .catch(e => { console.log(e) })
     })
 })
 
 const port = process.env.PORT || 4000;
-app.listen(port, () => {
+app.listen(port, async () => {
     console.log(`Waiting on port for someone :) ${port}`);
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+    }
 });
