@@ -1,10 +1,10 @@
 const express = require('express');
 var cors = require('cors');
 var app = express();
-const KEY = require('./key');
+// const KEY = require('./key');
 const Base64 = require('base-64');
 const { Sequelize, DataTypes } = require('sequelize');
-// const KEY = process.env.GITHUB_TOKEN
+const KEY = process.env.GITHUB_TOKEN
 app.use(cors())
 
 const sequelize = new Sequelize('sqlite::memory:', {
@@ -106,8 +106,8 @@ app.get('/add-sha/:sha', (req, res) => {
 })
 
 app.get('/collect-sha/:sha', async (req, res) => {
-    // const ip = req.headers['x-forwarded-for']
-    const ip = "176.10.112.40";
+    const ip = req.headers['x-forwarded-for']
+    // const ip = "176.10.112.40";
     const item = await Item.create({ sha: req.params.sha, ip: ip })
     return res.json({item})
 })
