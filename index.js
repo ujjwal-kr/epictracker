@@ -107,9 +107,14 @@ app.get('/add-sha/:sha', (req, res) => {
 
 app.get('/collect-sha/:sha', async (req, res) => {
     const ip = req.headers['x-forwarded-for']
-    // const ip = "176.10.112.40";
-    const item = await Item.create({ sha: req.params.sha, ip: ip })
-    return res.json({item})
+    const item = await Item.findOne({where: { sha: req.params.sha }})
+    if (item !== null) {
+        return res.json({message: "visited"})
+    } else {
+        console.log(JSON.stringify(item, null, 2))
+        const newItem = await Item.create({ sha: req.params.sha, ip: ip })
+        return res.json({item: newItem})
+    }
 })
 
 app.get('/scan/:ip', async (req, res) => {
