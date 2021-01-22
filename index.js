@@ -138,6 +138,15 @@ app.get('/collect-sha/:sha', (req, res) => {
     })
 })
 
+app.get('/scan/:ip', async (req, res) => {
+    const ip = req.params.ip
+    const items = await Item.findAll({
+        where: {ip: ip}
+    })
+    console.log(JSON.stringify(items, null, 2))
+    return res.json({items})
+})
+
 const port = process.env.PORT || 4000;
 app.listen(port, async () => {
     console.log(`Waiting on port for someone :) ${port}`);
