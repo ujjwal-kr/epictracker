@@ -106,7 +106,7 @@ app.get('/add-sha/:sha', (req, res) => {
     })
 })
 
-app.get('/collect-sha/:sha', (req, res) => {
+app.get('/collect-sha/:sha', async (req, res) => {
     // const ip = req.headers['x-forwarded-for']
     const ip = "176.10.112.40";
     const item = await Item.create({ sha: req.params.sha, ip: ip })
