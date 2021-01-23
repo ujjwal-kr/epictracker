@@ -29,12 +29,24 @@ body {
     font-size: 1.2em;
 }
 
+.scan-container {
+    text-align: center;
+}
+
 .hash {
     background: rgb(104, 104, 104);
     width: auto;
     font-size: 1.34rem;
     border-radius:5px;
     padding: 10px;
+}
+
+button {
+    font-size: 1em;
+    padding: .2em;
+    padding-left: .5em;
+    padding-right: .5em;
+    cursor: pointer;
 }
 
 p {

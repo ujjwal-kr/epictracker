@@ -28,6 +28,7 @@ document.querySelector('.lang').textContent = languagePhrase;
 document.querySelector('.depth').textContent = colorDepthPhrase;
 document.querySelector('.dimentions').textContent = dimentionPhrase;
 document.querySelector('.touch').textContent = touchPhrase
+document.querySelector('.scan-container').style.display = "none";
 
 // Try to get the graphichal processing unit info
 const canv = document.getElementById("canv");
@@ -158,6 +159,7 @@ nowFetch().then(response => {
         const visits = shaRESPONSE.visits
         document.querySelector('.visits').textContent = `According to the unique hash, you have visited the site ${visits} time(s).`
         console.log(visits)
+        document.querySelector('.scan-container').style.display = "block";
     }).catch(e => {
         console.log(e)
     })
