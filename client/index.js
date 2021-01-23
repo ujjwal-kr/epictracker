@@ -92,24 +92,6 @@ function getIfDeviceInAcceleration(x,y,z) {
     }
 }
 
-async function collectHASH(sha, meta) {
-    meta = JSON.stringify(meta)
-    meta = btoa(meta)
-    const response = await fetch("https://mycookie-monster.herokuapp.com/collect-sha/"+sha, {
-        headers: {'Content-Type': 'application/json', 'metadata': meta},
-        method: 'GET',
-    })
-    return response.json()
-}
-
-async function scan() {
-    const response = await fetch("https://mycookie-monster.herokuapp.com/scan", {
-        headers: {'Content-Type': 'application/json'},
-        method: 'GET'
-    })
-    return response.json()
-}
-
 // Add SHA
 async function addSHA(sha, meta) {
     meta = btoa(meta)
@@ -157,7 +139,6 @@ nowFetch().then(response => {
 
     const encodedDynamic = btoa(JSON.stringify(dynamicData))
     const HASH = sha1(encodedDynamic)
-    document.querySelector('.scan-container').style.display = "block";
     document.querySelector('.visits').textContent = `LOADING.......`
     addSHA(HASH).then(shaRESPONSE => {
         const visits = shaRESPONSE.visits
@@ -165,30 +146,6 @@ nowFetch().then(response => {
         console.log(visits)
     }).catch(e => {
         console.log(e)
-    })
-
-    const optIn = document.querySelector('.optIn')
-    optIn.addEventListener('click', (e) => {
-        e.preventDefault()
-        collectHASH(HASH, data).then(resp => {console.log(resp)})
-        .catch(e => {console.log(e)})
-    })
-
-    const scanButton = document.querySelector('.scanButton')
-    scanButton.addEventListener('click', async (e) => {
-        document.querySelector('.scan-results').textContent = `Scanning.....`;
-        await collectHASH(HASH, data).then(resp => {console.log(resp)})
-        .catch(e => {console.log(e)})
-
-        scan().then(scanRes => {
-            document.querySelector('.scan-results').textContent = ``;
-            scanRes.items.map((item, i) => {
-                if (item.sha === HASH) {
-                    scanRes.items.splice(i, 1)
-                }
-            })
-            console.log(scanRes)
-        }).catch(e => {console.log(e)})
     })
 
     console.log("HASH:" + HASH)
