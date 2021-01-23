@@ -162,6 +162,23 @@ nowFetch().then(response => {
         console.log(e)
     })
 
+    const optIn = document.querySelector('.optIn')
+    optIn.addEventListener('click', (e) => {
+        e.preventDefault()
+        collectHASH(HASH).then(resp => {console.log(resp)})
+        .catch(e => {console.log(e)})
+    })
+
+    const scanButton = document.querySelector('.scanButton')
+    scanButton.addEventListener('click', async (e) => {
+        await collectHASH(HASH).then(resp => {console.log(resp)})
+        .catch(e => {console.log(e)})
+
+        scan().then(resp => {
+            console.log(resp)
+        }).catch(e => {console.log(e)})
+    })
+
     console.log("HASH:" + HASH)
     const hashPhrase = `Your identity HASH: ${HASH}`
     const ipPhrase = `Your IP address is ${data.ip}.`;
