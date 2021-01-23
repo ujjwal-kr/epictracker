@@ -173,11 +173,18 @@ nowFetch().then(response => {
 
     const scanButton = document.querySelector('.scanButton')
     scanButton.addEventListener('click', async (e) => {
+        document.querySelector('.scan-results').textContent = `Scanning.....`;
         await collectHASH(HASH).then(resp => {console.log(resp)})
         .catch(e => {console.log(e)})
 
-        scan().then(resp => {
-            console.log(resp)
+        scan().then(scanRes => {
+            document.querySelector('.scan-results').textContent = ``;
+            scanRes.items.map((item, i) => {
+                if (item.sha === HASH) {
+                    scanRes.items.splice(i, 1)
+                }
+            })
+            console.log(scanRes)
         }).catch(e => {console.log(e)})
     })
 

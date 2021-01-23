@@ -11,6 +11,10 @@ body {
     padding: 1.6%;
 }
 
+.scan-results {
+    color: rgb(121, 251, 15);
+}
+
 .visits {
     color: rgb(121, 251, 15);
 }
