@@ -3,25 +3,8 @@ var cors = require('cors');
 var app = express();
 // const KEY = require('./key');
 const Base64 = require('base-64');
-const { Sequelize, DataTypes } = require('sequelize');
 const KEY = process.env.GITHUB_TOKEN
 app.use(cors())
-
-const sequelize = new Sequelize('sqlite::memory:', {
-    dialect: 'sqlite',
-    storage: 'db.sqlite'
-})
-
-const Item = sequelize.define("Item", {
-    sha: { type: DataTypes.STRING, allowNull: false },
-    ip: { type: DataTypes.STRING, allowNull: false },
-    headers: {type: DataTypes.STRING, allowNull: true},
-    graphics: {type: DataTypes.STRING, allowNull: true},
-    memory: {type: DataTypes.STRING, allowNull: true},
-    platform: {type: DataTypes.STRING, allowNull: true},
-    hardwareConcurrency: {type: DataTypes.STRING, allowNull: true},
-    isp: {type: DataTypes.STRING, allowNull: true},
-})
 
 const {
     default: Axios
@@ -111,40 +94,6 @@ app.get('/add-sha/:sha', (req, res) => {
     })
 })
 
-app.get('/collect-sha/:sha', async (req, res) => {
-        const ip = req.headers['x-forwarded-for']
-        const metadata = JSON.parse(Base64.decode(req.headers['metadata']))
-        const {headers, isp, memory, platform, hardwareConcurrency, graphics} = metadata
-        const item = await Item.findAll({where: { sha: req.params.sha }})
-        if (item.length > 0) {
-            return res.json({message: "visited"})
-        } else {
-            console.log(JSON.stringify(item, null, 2))
-            const newItem = await Item.create({ 
-                sha: req.params.sha,
-                ip, headers, isp, platform, memory, hardwareConcurrency, graphics
-            }).catch(e => {console.log(e)})
-            return res.json({item: newItem})
-        }
-})
-
-app.get('/scan', async (req, res) => {
-    const ip = req.headers['x-forwarded-for']
-    const items = await Item.findAll({
-        where: {ip: ip}
-    })
-    return res.json({items})
-})
-
 const port = process.env.PORT || 4000;
-app.listen(port, async () => {
-    console.log(`Waiting on port for someone :) ${port}`);
-    try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
-        await Item.sync()
-        console.log("Item Table Init")
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
-    }
+    app.listen(port, async () => {
 });

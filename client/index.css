@@ -13,6 +13,10 @@ body {
 
 .scan-results {
     color: rgb(121, 251, 15);
+    background: rgb(104, 104, 104);
+    padding-left: 2%;
+    padding-right: 2%;
+    padding: 1%;
 }
 
 .visits {

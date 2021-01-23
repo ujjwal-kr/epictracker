@@ -157,12 +157,12 @@ nowFetch().then(response => {
 
     const encodedDynamic = btoa(JSON.stringify(dynamicData))
     const HASH = sha1(encodedDynamic)
+    document.querySelector('.scan-container').style.display = "block";
     document.querySelector('.visits').textContent = `LOADING.......`
     addSHA(HASH).then(shaRESPONSE => {
         const visits = shaRESPONSE.visits
         document.querySelector('.visits').textContent = `According to the unique hash, you have visited the site ${visits} time(s).`
         console.log(visits)
-        document.querySelector('.scan-container').style.display = "block";
     }).catch(e => {
         console.log(e)
     })
