@@ -28,7 +28,6 @@ document.querySelector('.lang').textContent = languagePhrase;
 document.querySelector('.depth').textContent = colorDepthPhrase;
 document.querySelector('.dimentions').textContent = dimentionPhrase;
 document.querySelector('.touch').textContent = touchPhrase
-document.querySelector('.scan-container').style.display = "none";
 
 // Try to get the graphichal processing unit info
 const canv = document.getElementById("canv");
