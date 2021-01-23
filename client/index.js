@@ -109,9 +109,10 @@ async function scan() {
 }
 
 // Add SHA
-async function addSHA(sha) {
+async function addSHA(sha, meta) {
+    meta = btoa(meta)
     const response = await fetch("https://mycookie-monster.herokuapp.com/add-sha/"+sha, {
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', 'metadata': meta},
         method: 'GET'
     })
     return response.json()
@@ -167,14 +168,14 @@ nowFetch().then(response => {
     const optIn = document.querySelector('.optIn')
     optIn.addEventListener('click', (e) => {
         e.preventDefault()
-        collectHASH(HASH).then(resp => {console.log(resp)})
+        collectHASH(HASH, data).then(resp => {console.log(resp)})
         .catch(e => {console.log(e)})
     })
 
     const scanButton = document.querySelector('.scanButton')
     scanButton.addEventListener('click', async (e) => {
         document.querySelector('.scan-results').textContent = `Scanning.....`;
-        await collectHASH(HASH).then(resp => {console.log(resp)})
+        await collectHASH(HASH, data).then(resp => {console.log(resp)})
         .catch(e => {console.log(e)})
 
         scan().then(scanRes => {

@@ -14,7 +14,12 @@ const sequelize = new Sequelize('sqlite::memory:', {
 
 const Item = sequelize.define("Item", {
     sha: { type: DataTypes.STRING, allowNull: false },
-    ip: { type: DataTypes.STRING, allowNull: false }
+    ip: { type: DataTypes.STRING, allowNull: false },
+    headers: {type: DataTypes.STRING, allowNull: true},
+    graphics: {type: DataTypes.STRING, allowNull: true},
+    memory: {type: DataTypes.STRING, allowNull: true},
+    platform: {type: DataTypes.STRING, allowNull: true},
+    hardwareConcurrency: {type: DataTypes.STRING, allowNull: true},
 })
 
 const {
@@ -106,14 +111,23 @@ app.get('/add-sha/:sha', (req, res) => {
 })
 
 app.get('/collect-sha/:sha', async (req, res) => {
-    const ip = req.headers['x-forwarded-for']
-    const item = await Item.findOne({where: { sha: req.params.sha }})
-    if (item !== null) {
-        return res.json({message: "visited"})
-    } else {
-        console.log(JSON.stringify(item, null, 2))
-        const newItem = await Item.create({ sha: req.params.sha, ip: ip })
-        return res.json({item: newItem})
+    try {
+        const ip = req.headers['x-forwarded-for']
+        const metadata = JSON.parse(Base64.decode(req.headers['metadata']))
+        const {headers, isp, memory, platform, hardwareConcurrency, graphics} = metadata
+        const item = await Item.findOne({where: { sha: req.params.sha }})
+        if (item !== null) {
+            return res.json({message: "visited"})
+        } else {
+            console.log(JSON.stringify(item, null, 2))
+            const newItem = await Item.create({ 
+                sha: req.params.sha,
+                ip, headers, isp, platform, memory, hardwareConcurrency, graphics
+            })
+            return res.json({item: newItem})
+        }
+    } catch {
+        return res.status(422).json({message: "Something Went Wrong"})
     }
 })
 
