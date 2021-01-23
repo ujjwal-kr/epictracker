@@ -112,24 +112,20 @@ app.get('/add-sha/:sha', (req, res) => {
 })
 
 app.get('/collect-sha/:sha', async (req, res) => {
-    try {
         const ip = req.headers['x-forwarded-for']
         const metadata = JSON.parse(Base64.decode(req.headers['metadata']))
         const {headers, isp, memory, platform, hardwareConcurrency, graphics} = metadata
-        const item = await Item.findOne({where: { sha: req.params.sha }})
-        if (item !== null) {
+        const item = await Item.findAll({where: { sha: req.params.sha }})
+        if (item.length > 0) {
             return res.json({message: "visited"})
         } else {
             console.log(JSON.stringify(item, null, 2))
             const newItem = await Item.create({ 
                 sha: req.params.sha,
                 ip, headers, isp, platform, memory, hardwareConcurrency, graphics
-            })
+            }).catch(e => {console.log(e)})
             return res.json({item: newItem})
         }
-    } catch {
-        return res.status(422).json({message: "Something Went Wrong"})
-    }
 })
 
 app.get('/scan', async (req, res) => {
