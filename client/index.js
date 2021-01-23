@@ -92,9 +92,11 @@ function getIfDeviceInAcceleration(x,y,z) {
     }
 }
 
-async function collectHASH(sha) {
+async function collectHASH(sha, meta) {
+    meta = JSON.stringify(meta)
+    meta = btoa(meta)
     const response = await fetch("https://mycookie-monster.herokuapp.com/collect-sha/"+sha, {
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', 'metadata': meta},
         method: 'GET',
     })
     return response.json()

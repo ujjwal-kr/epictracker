@@ -20,6 +20,7 @@ const Item = sequelize.define("Item", {
     memory: {type: DataTypes.STRING, allowNull: true},
     platform: {type: DataTypes.STRING, allowNull: true},
     hardwareConcurrency: {type: DataTypes.STRING, allowNull: true},
+    isp: {type: DataTypes.STRING, allowNull: true},
 })
 
 const {
