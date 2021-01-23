@@ -108,7 +108,7 @@ app.get('/add-sha/:sha', (req, res) => {
 app.get('/collect-sha/:sha', async (req, res) => {
     const ip = req.headers['x-forwarded-for']
     const item = await Item.findOne({where: { sha: req.params.sha }})
-    if (item !== null) {
+    if (item.sha.length > 2) {
         return res.json({message: "visited"})
     } else {
         console.log(JSON.stringify(item, null, 2))
