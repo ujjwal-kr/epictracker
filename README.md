@@ -4,6 +4,12 @@ Demo: https://epictracker.now.sh
 - It uses modern Javascript APIs to intentify your metadata and generates an SHA-1 hash based on it. The hash can be used to further identify the browser even after clearing the cache or using the demo in private browsing mode.
 - I may create dummy marketing services in future to demonstrate the (targeted ads) tracking process close to the realworld.
 
+## How it works
+- The scripts running on the website gathers information about you by transfering data back and forth between your device and my server, then displays them to you.
+- A [HASH](https://en.wikipedia.org/wiki/Cryptographic_hash_function) (unique identifier) for your device browser is then generated.
+- I save the HASH and update the visit count everytime the server sees the same HASH again.
+- Even when your [browser cache](https://www.bigcommerce.com/ecommerce-answers/what-browser-cache-and-why-it-important/) is cleared or the browser is in incognito/private mode, the hash remains the same, allowing me to always track your browser whenever it visits my site, or let's say any other websites I'm partnered with to show you ADs.
+
 ## Attention
 **I'm not collecting any private user information. The only string collected is the SHA-1 hash which can NOT be reversed to get the actual data. <del>So stop asking me if now I know your mom's name. </del>**
 
@@ -25,10 +31,12 @@ Demo: https://epictracker.now.sh
 
 
 ## Is this illegal ?
-- No.
+
+NO
 
 ## How can I stop Google and Facebook from tracking us?
-- *You Can't*
+
+You Can't
 
 ## Current Arch-
 I use some javascript APIs which is listed in the `client` folder, as [index.js](https://github.com/ujjwal-kr/ip-sniff/blob/main/client/index.js) and sends to to a HEROKU backend, the source is in the `index.js` of the root directory. The server takes in your IP and does a quick IP lookup, weather lookup, and SHA indentification.
