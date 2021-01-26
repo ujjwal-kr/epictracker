@@ -26,7 +26,7 @@ Demo: https://epictracker.now.sh
 - Weather information of your area.
 
 ## How can we stop you from tracking us?
-- Use A VPN [your information wont be visible but probably I will detect if you are using one ;) ]
+- Use A [VPN](https://en.wikipedia.org/wiki/Virtual_private_network) [your information wont be visible but probably I will detect if you are using one ;) ]
 - Find ways to disable fingerprinting in your browser, which is tough.
 
 
