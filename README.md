@@ -1,6 +1,6 @@
 # `EpicTracker`
 Demo: https://epictracker.now.sh
-- It is a demontstration project of how can I track you using [device fingerprinting](https://en.wikipedia.org/wiki/Device_fingerprint) and some automated lookups and stuff.
+- It is a demonstration project of how can I track you using [device fingerprinting](https://en.wikipedia.org/wiki/Device_fingerprint) and some automated lookups and stuff.
 - It uses modern Javascript APIs to identify your metadata and generates an [SHA-1 hash](https://en.wikipedia.org/wiki/SHA-1) based on it. The hash can be used to further identify the browser even after clearing the cache or using the demo in private browsing mode.
 - I may create dummy marketing services in future to demonstrate the (targeted ads) tracking process close to the realworld.
 
