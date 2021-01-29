@@ -94,7 +94,7 @@ function getIfDeviceInAcceleration(x,y,z) {
 // Add SHA
 async function addSHA(sha, meta) {
     meta = btoa(meta)
-    const response = await fetch("https://mycookie-monster.herokuapp.com/add-sha/"+sha, {
+    const response = await fetch("https://ip-alternative.herokuapp.com/add-sha/"+sha, {
         headers: {'Content-Type': 'application/json', 'metadata': meta},
         method: 'GET'
     })
@@ -103,7 +103,7 @@ async function addSHA(sha, meta) {
 
 // init req
 async function nowFetch() {
-   const response = await fetch("https://mycookie-monster.herokuapp.com/", {
+   const response = await fetch("https://ip-alternative.herokuapp.com/", {
        headers: {'Content-Type': 'application/json'},
        method: 'GET'
    })
@@ -112,7 +112,7 @@ async function nowFetch() {
 
 // weather
 async function weather(city) {
-    const response = await fetch("https://mycookie-monster.herokuapp.com/weather/"+city, {
+    const response = await fetch("https://ip-alternative.herokuapp.com/weather/"+city, {
         headers: {'Content-Type': 'application/json'},
         method: 'GET'
     })
