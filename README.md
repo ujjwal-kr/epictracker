@@ -4,6 +4,8 @@ Demo: https://epictracker.now.sh
 - It uses modern Javascript APIs to identify your metadata and generates an [SHA-1 hash](https://en.wikipedia.org/wiki/SHA-1) based on it. The hash can be used to further identify the browser even after clearing the cache or using the demo in private browsing mode.
 - I may create dummy marketing services in future to demonstrate the (targeted ads) tracking process close to the realworld.
 
+![screenshot](https://ujjwalkumar.now.sh/images/tracker.jpeg)
+
 ## How it works
 - The scripts running on the website gathers information about you by transfering data back and forth between your device and my server, then displays them to you.
 - A [HASH](https://en.wikipedia.org/wiki/Cryptographic_hash_function) (unique identifier) for your device browser is then generated.
