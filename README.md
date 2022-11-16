@@ -38,7 +38,7 @@ NO
 
 ## How can I stop Google and Facebook from tracking us?
 
-NO, but sometimes a browser called brave happenes to tackle my script, but I'm working on making it better maybe.
+NO, but using a browser with fingerprinting disabled can help.
 
 ## Current Arch-
 I use some javascript APIs which is listed in the `client` folder, as [index.js](https://github.com/ujjwal-kr/ip-sniff/blob/main/client/index.js) and sends to to a HEROKU backend, the source is in the `index.js` of the root directory. The server takes in your IP and does a quick IP lookup, weather lookup, and SHA indentification.
