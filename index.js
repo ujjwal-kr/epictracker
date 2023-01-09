@@ -23,13 +23,13 @@ app.get('/', async (req, res) => {
 
     const url = "https://api.ip8.com/ip/lookup/" + ip;
     // const url = "https://api.ip8.com/ip/lookup/176.10.112.40";
-
+    console.log(url)
     await Axios.get(url, {
         headers: {
             'user-agent': agent,
         }
     }).then(async result => {
-        console.log(result)
+        console.log(result.data)
         const data = {
             headers: req.headers['user-agent'],
             ip,
