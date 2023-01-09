@@ -29,6 +29,7 @@ app.get('/', async (req, res) => {
             'user-agent': agent,
         }
     }).then(async result => {
+        console.log(result)
         const data = {
             headers: req.headers['user-agent'],
             ip,
