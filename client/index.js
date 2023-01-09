@@ -7,7 +7,7 @@ const deviceHeight = screen.availHeight;
 const colorDepth = screen.colorDepth;
 let touchPoints = navigator.maxTouchPoints;
 let touchSupport;
-// Phrases
+// Phrases 
 const memeoryPhrase = `Your device memory [RAM] is around ${memory} GB.`;
 if (touchPoints > 1) {touchSupport = true}
 else {touchSupport = false}
