@@ -18,7 +18,7 @@ app.get('/', async (req, res) => {
     console.log("========USER AGENT=======")
     console.log(req.headers["user-agent"])
 
-    const ip = req.headers['x-forwarded-for']
+    const ip = req.headers['x-forwarded-for'].split(",")[0].trim()
     const agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36';
 
     const url = "https://api.ip8.com/ip/lookup/" + ip;
