@@ -11,19 +11,12 @@ const {
 } = require('axios');
 
 app.get('/', async (req, res) => {
-    console.log(req.socket.remoteAddress)
-    console.log(req.ip)
-    console.log("==IP ADDR==")
-    console.log(req.headers['x-forwarded-for'])
-    console.log("========USER AGENT=======")
-    console.log(req.headers["user-agent"])
 
     const ip = req.headers['x-forwarded-for'].split(",")[0].trim()
     const agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36';
 
     const url = "https://api.ip8.com/ip/lookup/" + ip;
     // const url = "https://api.ip8.com/ip/lookup/176.10.112.40";
-    console.log(url)
     await Axios.get(url, {
         headers: {
             'user-agent': agent,
