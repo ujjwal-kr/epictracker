@@ -87,7 +87,7 @@ app.get('/add-sha/:sha', (req, res) => {
     })
 })
 
-const port = 4000;
+const port = proces.env.PORT || 4000;
     app.listen(port, async () => {
         console.log("Listening on http://localhost:4000")
 });
