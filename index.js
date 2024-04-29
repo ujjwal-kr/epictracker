@@ -1,7 +1,6 @@
 const express = require('express');
 var cors = require('cors');
 var app = express();
-// const KEY = require('./key');
 const Base64 = require('base-64');
 const KEY = process.env.GITHUB_TOKEN
 app.use(cors())
@@ -11,37 +10,37 @@ const {
 } = require('axios');
 
 app.get('/', async (req, res) => {
-
-    const ip = req.headers['x-forwarded-for'].split(",")[0].trim()
-    const agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36';
-
-    const url = "https://api.ip8.com/ip/lookup/" + ip;
-    // const url = "https://api.ip8.com/ip/lookup/176.10.112.40";
-    await Axios.get(url, {
-        headers: {
-            'user-agent': agent,
+    try {
+        const url = "https://api2.ip8.com/ip/info";
+        const response = await Axios.post(url);
+        if (response.status === 200 && response.data && response.data.ip && response.data.ip.length > 0) {
+            const ipAddress = response.data.ip[0];
+            if (response.data.data && response.data.data[ipAddress]) {
+                const ipData = response.data.data[ipAddress];
+                const data = {
+                    headers: req.headers['user-agent'],
+                    ip: ipAddress,
+                    isp: ipData.isp.isp,
+                    ispFull: ipData.isp.organization,
+                    city: ipData.geoip.city,
+                    pin: ipData.geoip.postalcode,
+                    timezone: ipData.geoip.timezone,
+                    country: ipData.geoip.country,
+                    continent: ipData.geoip.continent,
+                    latitude: ipData.geoip.latitude,
+                    longitude: ipData.geoip.longitude,
+                };
+                return res.status(200).json(data);
+            } else {
+                throw new Error("Invalid response data format");
+            }
+        } else {
+            throw new Error("Invalid response from IP info API");
         }
-    }).then(async result => {
-        console.log(result.data)
-        const data = {
-            headers: req.headers['user-agent'],
-            ip,
-            isp: result.data.details.geoip[0].isp.org,
-            ispFull: result.data.details.geoip[0].isp.ASNname,
-            city: result.data.details.geoip[0].city.name,
-            pin: result.data.details.geoip[0].city.zip,
-            timezone: result.data.details.geoip[0].city.timezone,
-            continent: result.data.details.geoip[0].continent.name,
-            country: result.data.details.geoip[0].country.name,
-            latitude: result.data.details.geoip[0].city.details.latitude,
-            longitude: result.data.details.geoip[0].city.details.longitude,
-        }
-
-        return res.status(200).json(data)
-    }).catch(e => {
-        console.log("Something Went Wrong, wonderfully handled exception", e)
-    })
-
+    } catch (error) {
+        console.error("Error fetching IP information:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
 });
 
 app.get('/weather/:city', async (req, res) => { // Because URL PARAMS ARE COOLER
@@ -88,6 +87,7 @@ app.get('/add-sha/:sha', (req, res) => {
     })
 })
 
-const port = process.env.PORT || 4000;
+const port = 4000;
     app.listen(port, async () => {
+        console.log("Listening on http://localhost:4000")
 });

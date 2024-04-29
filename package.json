@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/ujjwal-kr/ip-sniff#readme",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^1.6.8",
     "base-64": "^1.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
