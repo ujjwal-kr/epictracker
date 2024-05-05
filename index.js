@@ -9,39 +9,10 @@ const {
     default: Axios
 } = require('axios');
 
-app.get('/', async (req, res) => {
-    try {
-        const url = "https://api2.ip8.com/ip/info";
-        const response = await Axios.post(url);
-        if (response.status === 200 && response.data && response.data.ip && response.data.ip.length > 0) {
-            const ipAddress = response.data.ip[0];
-            if (response.data.data && response.data.data[ipAddress]) {
-                const ipData = response.data.data[ipAddress];
-                const data = {
-                    headers: req.headers['user-agent'],
-                    ip: ipAddress,
-                    isp: ipData.isp.isp,
-                    ispFull: ipData.isp.organization,
-                    city: ipData.geoip.city,
-                    pin: ipData.geoip.postalcode,
-                    timezone: ipData.geoip.timezone,
-                    country: ipData.geoip.country,
-                    continent: ipData.geoip.continent,
-                    latitude: ipData.geoip.latitude,
-                    longitude: ipData.geoip.longitude,
-                };
-                return res.status(200).json(data);
-            } else {
-                throw new Error("Invalid response data format");
-            }
-        } else {
-            throw new Error("Invalid response from IP info API");
-        }
-    } catch (error) {
-        console.error("Error fetching IP information:", error);
-        return res.status(500).json({ error: "Internal Server Error" });
-    }
-});
+app.get("/headers", async (req, res) => {
+    const headers = req.headers;
+    return res.json({data: headers['user-agent']})
+})
 
 app.get('/weather/:city', async (req, res) => { // Because URL PARAMS ARE COOLER
     const city = req.params.city;
