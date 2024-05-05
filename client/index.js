@@ -101,11 +101,20 @@ async function addSHA(sha, meta) {
     return response.json()
 }
 
-// init req
+// get user agent
+async function getHeaders() {
+    const response = await fetch("https://epictracker.onrender.com/headers", {
+        headers: {'Content-Type': 'application/json'},
+        method: 'GET'
+    })
+    return response.json().data;
+}
+
+// init req for ip
 async function nowFetch() {
-   const response = await fetch("https://epictracker.onrender.com", {
+   const response = await fetch("https://api2.ip8.com/ip/info", {
        headers: {'Content-Type': 'application/json'},
-       method: 'GET'
+       method: 'POST'
    })
    return response.json()
 }
@@ -119,13 +128,16 @@ async function weather(city) {
     return response.json()
 }
 
-nowFetch().then(response => {
+nowFetch().then(async response => {
+    const ipAddress = response.ip[0]
+    const ipData = response.data[ipAddress]
+    const headers = await getHeaders();
     const data = {
-        headers: response.headers, ip: response.ip,isp: response.isp,
-        city: response.city,country: response.country,latitude: response.latitude,
-        longitude: response.longitude,timezone: response.timezone,memory: memory,
+        headers, ip: ipAddress, isp: ipData.isp.organization,
+        city: ipData.geoip.city,country: ipData.geoip.country,latitude: ipData.geoip.latitude,
+        longitude: ipData.geoip.longitude,timezone: ipData.geoip.timezone,memory: memory,
         platform: platform,hardwareConcurrency: hardwareConcurrency,language: language,
-        graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: response.pin, deviceWidth: deviceWidth,
+        graphics: graphicsRenderer, graphicsVendor: graphicsVendor, pin: ipData.geoip.postalcode, deviceWidth: deviceWidth,
         deviceHeight: deviceHeight, touchPoints: touchPoints
     }
 
