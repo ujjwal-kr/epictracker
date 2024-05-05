@@ -107,7 +107,7 @@ async function getHeaders() {
         headers: {'Content-Type': 'application/json'},
         method: 'GET'
     })
-    return response.json().data;
+    return response.json();
 }
 
 // init req for ip
@@ -133,7 +133,7 @@ nowFetch().then(async response => {
     const ipData = response.data[ipAddress]
     const headers = await getHeaders();
     const data = {
-        headers, ip: ipAddress, isp: ipData.isp.organization,
+        headers: headers.data, ip: ipAddress, isp: ipData.isp.organization,
         city: ipData.geoip.city,country: ipData.geoip.country,latitude: ipData.geoip.latitude,
         longitude: ipData.geoip.longitude,timezone: ipData.geoip.timezone,memory: memory,
         platform: platform,hardwareConcurrency: hardwareConcurrency,language: language,
